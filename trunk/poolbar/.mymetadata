@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="poolbar"
+  id="myeclipse.1346329304311"
+  context-root="/poolbar"
+  j2ee-spec="5.0"
+  archive="poolbar.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
