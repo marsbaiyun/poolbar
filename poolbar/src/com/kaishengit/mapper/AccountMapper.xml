@@ -4,8 +4,8 @@
 <mapper namespace="com.kaishengit.mapper.AccountMapper">
 	<cache/>
 	
-	<select id="login" resultType="Account" parameterType="Account">
-		select id,name,password from t_account where name = #{name}	and password = #{password}
+	<select id="login" resultType="Account" parameterType="Account" resultMap="accountMap">
+		SELECT ta.id,ta.`name` AS accountname,`password`,tb.id AS barid,tb.name AS barname,address,desknum FROM t_account AS ta LEFT JOIN t_bar AS tb ON ta.barid = tb.id where ta.name = #{name}	and password = #{password}
 	</select>
 	
 	<select id="findById" resultType="Account" parameterType="String">
@@ -23,4 +23,16 @@
 	<delete id="del" parameterType="String">
 		delete from t_account where id = #{id}
 	</delete>
+	
+	<resultMap type="Account" id="accountMap">
+		<id property="id" column="id"/>
+		<result property="name" column="accountname"/>
+		<result property="password" column="password"/>
+		<association property="bar" column="uid" javaType="Bar">
+			<id property="id" column="barid"/>
+			<result property="name" column="barname"/>
+			<result property="address" column="address"/>
+			<result property="desknum" column="desknum"/>
+		</association>
+	</resultMap>
 </mapper>
