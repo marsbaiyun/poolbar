@@ -17,12 +17,9 @@
                 <tr>
                     <td style="width:60%"><img src="img/billiards.png" width="64px" height="64px" alt="用户" /></td>
                     <td>
-                        ${sessionScope.account.bar.name }
-                        <br/>
-                        ${sessionScope.account.name }
-                        <br/>
-                        ${sessionScope.account.role }
-                        <br/>
+                        ${sessionScope.account.bar.name }<br/>
+                        ${sessionScope.account.name } <br/>
+                        ${sessionScope.account.role } <br/>
                     </td>
                 </tr>
             </table>
@@ -81,119 +78,63 @@
         </div>
         <div class="span9 pull-right" style="margin-right:30px">
             <ul class="breadcrumb">
-                <li class="active">商品管理</li>
-                <li class="pull-right"><a href="#myModal" data-toggle="modal">添加商品</a></li>				
+                <li class="active">会员管理</li>
+                <li class="pull-right"><a href="vip-new.html">添加会员</a></li>
             </ul>
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>序号</th>
-                        <th>商品名</th>
-                        <th>商品价格</th>
+                        <th>姓名</th>
+                        <th>联系方式</th>
+                        <th>会员级别</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>冰红茶</td>
-                        <td>3.0</td>
+                        <td>吴瑞涛</td>
+                        <td>13526563575</td>
+                        <td>VIP1</td>
                         <td>
-                            <a href="#editModal" data-toggle="modal">修改</a>
+                            <a href="vip-edit.html">修改</a>
                             <a href="#">删除</a>
                         </td>
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td>绿茶</td>
-                        <td>3.0</td>
+                        <td>吴瑞涛</td>
+                        <td>13526563575</td>
+                        <td>VIP1</td>
                         <td>
-                            <a href="#">修改</a>
+                            <a href="vip-edit.html">修改</a>
                             <a href="#">删除</a>
                         </td>
                     </tr>
                     <tr>
                         <td>3</td>
-                        <td>茉莉蜜茶</td>
-                        <td>3.0</td>
+                        <td>吴瑞涛</td>
+                        <td>13526563575</td>
+                        <td>VIP1</td>
                         <td>
-                            <a href="#">修改</a>
+                            <a href="vip-edit.html">修改</a>
                             <a href="#">删除</a>
                         </td>
                     </tr>
                     <tr>
                         <td>4</td>
-                        <td>红旗渠（金）</td>
-                        <td>10.0</td>
+                        <td>吴瑞涛</td>
+                        <td>13526563575</td>
+                        <td>VIP1</td>
                         <td>
-                            <a href="#">修改</a>
-                            <a href="#">删除</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>帝豪</td>
-                        <td>10.0</td>
-                        <td>
-                            <a href="#">修改</a>
+                            <a href="vip-edit.html">修改</a>
                             <a href="#">删除</a>
                         </td>
                     </tr>
                 </tbody>
             </table>
-		</div>
+        </div>
     </div>
-	<div class="modal hide fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="myModalLabel">商品添加</h3>
-		</div>
-		<div class="modal-body">
-			<form class="form-horizontal">
-				<div class="control-group">
-					<label class="control-label">商品名：</label>
-					<div class="controls">
-					  <input type="text" name="name">
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">价格：</label>
-					<div class="controls">
-					  <input type="text" name="price">
-					</div>
-				</div>				
-			</form>
-		</div>
-		<div class="modal-footer">
-			<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-			<button class="btn btn-primary">保存</button>
-		</div>
-	</div>
-	<div class="modal hide fade in" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="myModalLabel">商品修改</h3>
-		</div>
-		<div class="modal-body">
-			<form class="form-horizontal">
-				<div class="control-group">
-					<label class="control-label">商品名：</label>
-					<div class="controls">
-					  <input type="text" name="name">
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">价格：</label>
-					<div class="controls">
-					  <input type="text" name="password">
-					</div>
-				</div>				
-			</form>
-		</div>
-		<div class="modal-footer">
-			<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-			<button class="btn btn-primary">保存</button>
-		</div>
-	</div>
 </body>
 </html>
