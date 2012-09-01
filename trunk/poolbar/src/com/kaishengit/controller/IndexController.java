@@ -27,7 +27,7 @@ public class IndexController {
 			return "redirect:/home";
 		} else {
 			session.setAttribute("account", a);
-			return "redirect:main/{}";
+			return "redirect:/consume";
 		}
 	}
 	
