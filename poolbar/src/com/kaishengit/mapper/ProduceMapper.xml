@@ -8,6 +8,17 @@
 		select * from t_produce where id = #{id}
 	</select>
 	
+	<select id="findByBarid" resultType="list" parameterType="String" resultMap="producelist">
+		select id,`name`,price,barid from t_produce where barid = #{barid}
+ 	</select>
+	
+	<resultMap type="Produce" id="producelist">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="price" property="price"/>
+		<result column="barid" property="barid"/>
+	</resultMap>
+	
 	<insert id="save" parameterType="Produce">
 		insert into t_produce(id,`name`,price,barid) values(#{id},#{name},#{price},#{barid}) 
 	</insert>
