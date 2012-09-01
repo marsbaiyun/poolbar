@@ -70,40 +70,35 @@
         </div>
         <div class="span9 pull-right" style="margin-right:30px">
             <ul class="breadcrumb">
-                <li class="active">会员管理</li>
-                <li class="pull-right"><a href="${basePath }/vip/new">添加会员</a></li>
+                <li class="active">会员管理 / 添加会员</li>
             </ul>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>序号</th>
-                        <th>姓名</th>
-                        <th>联系方式</th>
-                        <th>会员级别</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                	<c:forEach var="vip" items="${vipList }" varStatus="status">
-                	<tr>
-                		<td>${status.count}</td>
-                        <td>${vip.name }</td>
-                        <td>${vip.tel }</td>
-                        <td>
-                        	<c:choose>
-                        		<c:when test="${vip.discount  eq '0.7'}">VIP3</c:when>
-                        		<c:when test="${vip.discount  eq '0.8'}">VIP2</c:when>
-								<c:otherwise>VIP1</c:otherwise>
-                        	</c:choose>
-                        </td>
-                        <td>
-                            <a href="${basePath }/vip/edit?id=${vip.id}">修改</a>
-                            <a href="${basePath }/vip/del?id=${vip.id}">删除</a>
-                        </td>
-                    </tr>	
-                	</c:forEach>
-                </tbody>
-            </table>
+			<form class="form-horizontal" action="${basePath }/vip/edit" method="post" style="margin-top:30px;border:1px solid #ddd;padding-top:20px;">
+				<input type="hidden" name="id" value="${vip.id }">
+				<input type="hidden" name="discount" value="${vip.discount }">
+				<div class="control-group">
+					<label class="control-label">姓名：</label>
+					<div class="controls">
+					  <input type="text" name="name" value="${vip.name }">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">密码：</label>
+					<div class="controls">
+					  <input type="password" name="password" value="${vip.password }">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">联系方式：</label>
+					<div class="controls">
+					  <input type="text" name="tel" value="${vip.tel }">
+					</div>	
+				</div>
+				<div class="control-group">
+					<div class="controls">
+					  <input value="修改" type="submit" class="btn btn-primary">
+					</div>
+				</div>
+			</form>
         </div>
     </div>
 </body>

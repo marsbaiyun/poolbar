@@ -22,4 +22,24 @@ public class VipService {
 		return vipMapper.findAll();
 	}
 
+	public void save(Vip vip) {
+		
+		vipMapper.save(vip);
+	}
+
+	public void update(Vip vip) {
+		vipMapper.update(vip);
+		
+	}
+
+	public Vip findById(String id) {
+		
+		return vipMapper.findById(id);
+	}
+
+	public void del(String id) {
+		vipMapper.del(id);
+		
+	}
+
 }

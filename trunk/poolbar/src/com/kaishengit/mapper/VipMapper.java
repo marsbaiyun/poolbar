@@ -10,7 +10,7 @@ public interface VipMapper {
 	
 	public void save (Vip vip);
 	
-	public void update (Vip vip);
+	public void update(Vip vip);
 	
 	public void del (String id);
 
