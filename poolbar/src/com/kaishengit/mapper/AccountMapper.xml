@@ -5,7 +5,7 @@
 	<cache/>
 	
 	<select id="login" resultType="Account" parameterType="Account" resultMap="accountMap">
-		SELECT ta.id,ta.`name` AS accountname,`password`,tb.id AS barid,tb.name AS barname,address,desknum FROM t_account AS ta LEFT JOIN t_bar AS tb ON ta.barid = tb.id where ta.name = #{name}	and password = #{password}
+		SELECT ta.id,ta.`name` AS accountname,`password`,role,tb.id AS barid,tb.name AS barname,address,desknum FROM t_account AS ta LEFT JOIN t_bar AS tb ON ta.barid = tb.id where ta.name = #{name}	and password = #{password}
 	</select>
 	
 	<select id="findById" resultType="Account" parameterType="String">
@@ -28,6 +28,7 @@
 		<id property="id" column="id"/>
 		<result property="name" column="accountname"/>
 		<result property="password" column="password"/>
+		<result property="role" column="role"/>
 		<association property="bar" column="uid" javaType="Bar">
 			<id property="id" column="barid"/>
 			<result property="name" column="barname"/>
