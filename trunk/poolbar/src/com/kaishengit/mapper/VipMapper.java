@@ -1,5 +1,7 @@
 package com.kaishengit.mapper;
 
+import java.util.List;
+
 import com.kaishengit.pojo.Vip;
 
 public interface VipMapper {
@@ -11,4 +13,6 @@ public interface VipMapper {
 	public void update (Vip vip);
 	
 	public void del (String id);
+
+	public List<Vip> findAll();
 }

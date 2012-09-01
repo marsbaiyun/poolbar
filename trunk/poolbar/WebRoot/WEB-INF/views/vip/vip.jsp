@@ -15,7 +15,7 @@
         <div class="span3">
             <table>
                 <tr>
-                    <td style="width:60%"><img src="img/billiards.png" width="64px" height="64px" alt="用户" /></td>
+                    <td style="width:60%"><img src="../static/img/billiards.png" width="64px" height="64px" alt="用户" /></td>
                     <td>
                         ${sessionScope.account.bar.name }<br/>
                         ${sessionScope.account.name } <br/>
@@ -92,46 +92,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>吴瑞涛</td>
-                        <td>13526563575</td>
-                        <td>VIP1</td>
+                	<c:forEach var="vip" items="${vipList }">
+                	<tr>
+                        <td>${vip.id }</td>
+                        <td>${vip.name }</td>
+                        <td>${vip.tel }</td>
                         <td>
-                            <a href="vip-edit.html">修改</a>
-                            <a href="#">删除</a>
+                        	<c:choose>
+                        		<c:when test="${vip.discount  == 0.7}">VIP3</c:when>
+                        		<c:when test="${vip.discount  == 0.8}">VIP2</c:when>
+								<c:otherwise>VIP1</c:otherwise>
+                        	</c:choose>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>吴瑞涛</td>
-                        <td>13526563575</td>
-                        <td>VIP1</td>
                         <td>
-                            <a href="vip-edit.html">修改</a>
-                            <a href="#">删除</a>
+                            <a href="${basePath }/vip/vip-edit">修改</a>
+                            <a href="${basePath }/vip/vip-del&id=${vip.id}">删除</a>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>吴瑞涛</td>
-                        <td>13526563575</td>
-                        <td>VIP1</td>
-                        <td>
-                            <a href="vip-edit.html">修改</a>
-                            <a href="#">删除</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>吴瑞涛</td>
-                        <td>13526563575</td>
-                        <td>VIP1</td>
-                        <td>
-                            <a href="vip-edit.html">修改</a>
-                            <a href="#">删除</a>
-                        </td>
-                    </tr>
+                    </tr>	
+                	</c:forEach>
                 </tbody>
             </table>
         </div>

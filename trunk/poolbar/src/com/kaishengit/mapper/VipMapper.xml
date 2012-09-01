@@ -7,7 +7,16 @@
 	<select id="findById" resultType="Vip" parameterType="String">
 		select * from t_vip where id = #{id}
 	</select>
-	
+	<select id="findAll" resultType="list" resultMap="findVip">
+		select id ,name,password,tel,discount from t_vip 
+	</select>
+	<resultMap type="Vip" id="findVip">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="password" column="password"/>
+		<result property="tel" column="tel"/>
+		<result property="discount" column="discount"/>
+	</resultMap>		
 	<insert id="save" parameterType="Vip">
 		insert into t_vip(id,`name`,password,tel,discount) values(#{id},#{name},#{password},#{tel},#{discount}) 
 	</insert>
