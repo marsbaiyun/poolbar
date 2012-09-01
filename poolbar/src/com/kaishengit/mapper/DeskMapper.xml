@@ -4,6 +4,10 @@
 <mapper namespace="com.kaishengit.mapper.DeskMapper">
 	<cache/>	
 	
+	<select id="findAll" parameterType="String" resultType="list" resultMap="deskList">
+		SELECT td.id,price,td.barid,orderid,starttime FROM t_desk AS td LEFT JOIN t_order AS tor ON td.orderid = tor.id WHERE td.barid = #{barid}
+	</select>
+	
 	<select id="findById" resultType="Desk" parameterType="int">
 		select * from t_desk where id = #{id}
 	</select>
@@ -19,4 +23,15 @@
 	<delete id="del" parameterType="String">
 		delete from t_desk where id = #{id}
 	</delete>
+	
+	<resultMap type="Desk" id="deskList">
+		<id property="id" column="id"/>
+		<id property="barid" column="barid"/>
+		<result property="price" column="price"/>
+		<association property="order" column="orderid" javaType="Order">
+			<id property="id" column="orderid"/>
+			<result property="starttime" column="starttime"/>
+		</association>
+	</resultMap>
+	
 </mapper>

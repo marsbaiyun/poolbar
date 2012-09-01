@@ -1,13 +1,11 @@
 package com.kaishengit.pojo;
 
-import java.util.List;
-
 public class Desk {
 
 	private int id;
 	private float price;
 	private Bar bar;
-	private List<Order> orderlist;
+	private Order order;
 	
 	private String orderid;
 	private String barid;
@@ -37,18 +35,18 @@ public class Desk {
 		this.barid = barid;
 	}
 
-	public List<Order> getOrderlist() {
-		return orderlist;
-	}
-	public void setOrderlist(List<Order> orderlist) {
-		this.orderlist = orderlist;
-	}
 	public String getOrderid() {
 		return orderid;
 	}
 	public void setOrderid(String orderid) {
 		this.orderid = orderid;
 	}
+    public Order getOrder() {
+        return order;
+    }
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 	
 	
 }
