@@ -1,0 +1,49 @@
+﻿body{
+    font-family: "微软雅黑", "黑体", "华文细黑" !important;
+}
+
+.container {
+    width: 1000px !important;
+}
+.box {
+    border: 1px solid #DDDDDD;
+    padding: 5px;
+}
+.box .head {
+    border-bottom: 1px solid #DDDDDD;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+}
+.clear{
+    clear:both;
+}
+.wall {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border: 1px solid #DDDDDD;
+    border-style: none solid solid;
+    border-width: medium 1px 1px;
+    padding: 15px;
+}
+.box {
+    border: 1px solid #DDDDDD;
+    padding: 5px;
+}
+.box .head {
+    border-bottom: 1px solid #DDDDDD;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+}
+.clear{
+    clear:both;
+}
+.link-black{
+    color:#000;
+}
