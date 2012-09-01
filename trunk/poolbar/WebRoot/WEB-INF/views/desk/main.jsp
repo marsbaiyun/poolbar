@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#"> 
+                    <a href="produce/list"> 
                         <i class="icon-barcode"></i>
                         商品管理
                     </a>

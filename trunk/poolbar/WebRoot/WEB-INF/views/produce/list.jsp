@@ -15,7 +15,7 @@
         <div class="span3">
             <table>
                 <tr>
-                    <td style="width:60%"><img src="img/billiards.png" width="64px" height="64px" alt="用户" /></td>
+                    <td style="width:60%"><img src="${basePath }/static/img/billiards.png" width="64px" height="64px" alt="用户" /></td>
                     <td>
                         ${sessionScope.account.bar.name }
                         <br/>
@@ -89,56 +89,22 @@
                     <tr>
                         <th>序号</th>
                         <th>商品名</th>
-                        <th>商品价格</th>
+                        <th>商品价格（单位：元）</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>冰红茶</td>
-                        <td>3.0</td>
-                        <td>
-                            <a href="#editModal" data-toggle="modal">修改</a>
-                            <a href="#">删除</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>绿茶</td>
-                        <td>3.0</td>
-                        <td>
-                            <a href="#">修改</a>
-                            <a href="#">删除</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>茉莉蜜茶</td>
-                        <td>3.0</td>
-                        <td>
-                            <a href="#">修改</a>
-                            <a href="#">删除</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>红旗渠（金）</td>
-                        <td>10.0</td>
-                        <td>
-                            <a href="#">修改</a>
-                            <a href="#">删除</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>帝豪</td>
-                        <td>10.0</td>
-                        <td>
-                            <a href="#">修改</a>
-                            <a href="#">删除</a>
-                        </td>
-                    </tr>
+                	<c:forEach items="${producelist}" var="produce" varStatus="status">
+	                    <tr>
+	                        <td>${status.count}</td>
+	                        <td class="producename">${produce.name }</td>
+	                        <td class="produceprice">${produce.price}</td>
+	                        <td>
+	                            <a href="#editModal" class="editbtn" rel="${produce.id }" data-toggle="modal">修改</a>
+	                            <a href="del/${produce.id }" class="delbtn">删除</a>
+	                        </td>
+	                    </tr>
+                    </c:forEach>
                 </tbody>
             </table>
 		</div>
@@ -149,24 +115,25 @@
 			<h3 id="myModalLabel">商品添加</h3>
 		</div>
 		<div class="modal-body">
-			<form class="form-horizontal">
+			<form id="newproduce" action="save" method="post" class="form-horizontal">
+				<input type="hidden" id="barid" name="barid" value="${account.bar.id }">
 				<div class="control-group">
 					<label class="control-label">商品名：</label>
 					<div class="controls">
-					  <input type="text" name="name">
+					  <input type="text"  name="name">
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">价格：</label>
 					<div class="controls">
-					  <input type="text" name="price">
+					  <input class="span1" type="text"  name="price">元
 					</div>
 				</div>				
 			</form>
 		</div>
 		<div class="modal-footer">
 			<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-			<button class="btn btn-primary">保存</button>
+			<button id="add" class="btn btn-primary">保存</button>
 		</div>
 	</div>
 	<div class="modal hide fade in" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -175,25 +142,54 @@
 			<h3 id="myModalLabel">商品修改</h3>
 		</div>
 		<div class="modal-body">
-			<form class="form-horizontal">
+			<form id="editeproduce" action="update" method="post" class="form-horizontal">
+				<input type="hidden" id="proid" name="id">				
+				<input type="hidden" id="barid" name="barid" value="${account.bar.id }">
 				<div class="control-group">
 					<label class="control-label">商品名：</label>
 					<div class="controls">
-					  <input type="text" name="name">
+					  <input type="text" id="proname" name="name">
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">价格：</label>
 					<div class="controls">
-					  <input type="text" name="password">
+					  <input class="span1" type="text" id="proprice" name="price">元
 					</div>
 				</div>				
 			</form>
 		</div>
 		<div class="modal-footer">
 			<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-			<button class="btn btn-primary">保存</button>
+			<button id="edite" class="btn btn-primary">保存</button>
 		</div>
 	</div>
+	<script type="text/javascript">
+		
+		
+		$("#add").click(function() {
+			$("#newproduce").submit();
+		});
+	
+	 	$(".editbtn").click(function() {
+	 		var name = $(this).parent().siblings(".producename").text();
+	 		var id = $(this).attr("rel");
+	 		var price = $(this).parent().siblings(".produceprice").text();
+	 		$("#proid").val(id);
+			$("#proname").val(name);
+			$("#proprice").val(price);
+	 	});
+	 	
+		$("#edite").click(function() {
+			$("#editeproduce").submit();
+		});
+		
+		$(".delbtn").click(function() {
+			var del = confirm("确定要删除吗？");
+			if (del != true) {
+				return false;
+			}
+		});		
+	</script>
 </body>
 </html>
