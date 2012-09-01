@@ -9,6 +9,17 @@
 		a{
 			margin-left:250px;
 		 }
+		 .login {
+            width:350px;
+            height:300px;
+            margin-right:auto;
+            margin-left:auto;
+            margin-top:40px;
+            
+        }
+        #myform {
+            margin-left:10px;
+        }
 	</style>
 </head>
 <body>
@@ -34,8 +45,10 @@
                         <input type="password" id="password" name="password" style="width:320px" />
                         <span class="help-block" id="span2"></span>
                     </div>
-					<button id="login" class="btn btn-primary" href="#">登陆</button>
-                    <button id="btn" class="btn btn-success" type="button">注册</button>
+					<div class="pull-right">
+						<button id="login" class="btn btn-primary" href="#">登陆</button>
+	                    <button id="btn" class="btn btn-success" type="button">注册</button>
+					</div>
                 </fieldset>
             </form>
         </div>
