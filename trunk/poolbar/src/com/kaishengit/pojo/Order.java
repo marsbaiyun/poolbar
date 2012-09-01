@@ -12,7 +12,7 @@ public class Order {
 	private Account account;
 	
 	private String vipid;
-	private String deskid;
+	private int deskid;
 	private String barid;
 	private String accountid;
 	
@@ -70,10 +70,10 @@ public class Order {
 	public void setVipid(String vipid) {
 		this.vipid = vipid;
 	}
-	public String getDeskid() {
+	public int getDeskid() {
 		return deskid;
 	}
-	public void setDeskid(String deskid) {
+	public void setDeskid(int deskid) {
 		this.deskid = deskid;
 	}
 	public String getBarid() {
