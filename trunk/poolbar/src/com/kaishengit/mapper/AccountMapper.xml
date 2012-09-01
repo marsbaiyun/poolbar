@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kaishengit.mapper.AccountMapper">
+	<cache/>
+	
+	<select id="login" resultType="Account" parameterType="Account">
+		select id,name,password from t_account where name = #{name}	and password = #{password}
+	</select>
+	
+	<select id="findById" resultType="Account" parameterType="String">
+		select id,name,password from t_account where id = #{id}
+	</select>
+	
+	<insert id="save" parameterType="Account">
+		insert into t_account(id,`name`,password,role,barid) values(#{id},#{name},#{password},#{role},#{barid}) 
+	</insert>
+	
+	<update id="update" parameterType="Account">
+		update t_account set `name`=#{name},password = #{password},role = #{role},barid = #{barid} where id = #{id}
+	</update>
+	
+	<delete id="del" parameterType="String">
+		delete from t_account where id = #{id}
+	</delete>
+</mapper>

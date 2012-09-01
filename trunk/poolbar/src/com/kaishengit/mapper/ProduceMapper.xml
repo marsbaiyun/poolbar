@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kaishengit.mapper.ProduceMapper">
+	<cache/>	
+	
+	<select id="findById" resultType="Produce" parameterType="String">
+		select * from t_produce where id = #{id}
+	</select>
+	
+	<insert id="save" parameterType="Produce">
+		insert into t_produce(id,`name`,price,barid) values(#{id},#{name},#{price},#{barid}) 
+	</insert>
+	
+	<update id="update" parameterType="Produce">
+		update t_produce set `name` = #{name},price = #{price},barid = #{barid} where id = #{id}
+	</update>
+	
+	<delete id="del" parameterType="String">
+		delete from t_produce where id = #{id}
+	</delete>
+</mapper>
