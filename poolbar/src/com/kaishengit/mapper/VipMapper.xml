@@ -8,7 +8,7 @@
 		select * from t_vip where id = #{id}
 	</select>
 	<select id="findAll" resultType="list" resultMap="findVip">
-		select id ,name,password,tel,discount from t_vip 
+		select id ,name,password,tel,discount from t_vip order by discount  asc
 	</select>
 	<resultMap type="Vip" id="findVip">
 		<id property="id" column="id"/>
