@@ -19,7 +19,6 @@ public class IndexController {
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String login (HttpSession session,Account account,RedirectAttributes redirectAttributes) {
-		System.out.println(account.getName());
 		Account a = accountService.login(account);
 		if (a == null) {
 			redirectAttributes.addFlashAttribute("error", "用户名或者密码错误！");

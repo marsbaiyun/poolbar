@@ -11,16 +11,7 @@
 	<%@ include file="../include/top.jsp" %>
     <div id="content" class="container">
         <div class="span3">
-            <table>
-                <tr>
-                    <td style="width:60%"><img src="${basePath }/static/img/billiards.png" width="64px" height="64px" alt="用户" /></td>
-                    <td>
-                        球吧名称</br>
-                        用户名</br>
-                        角色</br>
-                    </td>
-                </tr>
-            </table>
+            <%@ include file="../include/role.jsp" %>
             <ul class="nav nav-list well">
                 <li class="nav-header">账目管理</li>
                 <li class="active">
@@ -144,7 +135,7 @@
                 </li>
                 <li class="span3">
                     <div class="thumbnail">
-                        <img src="${basePath }/static/img/off.png" alt="" />
+                        <img src="img/off.png" alt="" />
                         <div class="caption">
                             <table>
                                 <tr>
@@ -166,7 +157,7 @@
                 </li>
                 <li class="span3">
                     <div class="thumbnail">
-                        <img src="${basePath }/static/img/on.png" alt="" />
+                        <img src="img/on.png" alt="" />
                         <div class="caption">
                             <table>
                                 <tr>
