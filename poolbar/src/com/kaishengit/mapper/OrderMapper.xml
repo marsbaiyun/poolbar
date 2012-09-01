@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kaishengit.mapper.OrderMapper">
+	<cache/>	
+	
+	<select id="findById" resultType="Order" parameterType="String">
+		select * from t_order where id = #{id}
+	</select>
+	
+	<insert id="save" parameterType="Order">
+		insert into t_order(id,starttime,endtime,tolal,vipid,deskid,barid,accountid) values(#{id},#{starttime},#{endtime},#{tolal},#{vipid},#{deskid},#{barid},#{accountid}) 
+	</insert>
+	
+	<update id="update" parameterType="Order">
+		update t_order set starttime=#{starttime},endtime = #{endtime},tolal=#{tolal},vipid = #{vipid},deskid=#{deskid},barid = #{barid},accountid=#{accountid} where id = #{id}
+	</update>
+	
+	<delete id="del" parameterType="String">
+		delete from t_order where id = #{id}
+	</delete>
+</mapper>

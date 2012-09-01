@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kaishengit.mapper.ConsumeMapper">
+	<cache/>	
+	
+	<select id="findById" resultType="Consume" parameterType="String">
+		select * from t_bar where id = #{id}
+	</select>
+	
+	<insert id="save" parameterType="Consume">
+		insert into t_consume(id,produceid,num,barid) values(#{id},#{produceid},#{num},#{barid}) 
+	</insert>
+	
+	<update id="update" parameterType="Consume">
+		update t_consume set produceid=#{produceid},num = #{num},barid = #{barid} where id = #{id}
+	</update>
+	
+	<delete id="del" parameterType="String">
+		delete from t_consume where id = #{id}
+	</delete>
+</mapper>
