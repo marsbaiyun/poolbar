@@ -8,8 +8,8 @@
 		SELECT ta.id,ta.`name` AS accountname,`password`,role,tb.id AS barid,tb.name AS barname,address,desknum FROM t_account AS ta LEFT JOIN t_bar AS tb ON ta.barid = tb.id where ta.name = #{name}	and password = #{password}
 	</select>
 	
-	<select id="findById" resultType="Account" parameterType="String">
-		select id,name,password from t_account where id = #{id}
+	<select id="findById" resultType="Account" parameterType="String" resultMap="accountMap">
+		SELECT ta.id,ta.`name` AS accountname,`password`,role,tb.id AS barid,tb.name AS barname,address,desknum FROM t_account AS ta LEFT JOIN t_bar AS tb ON ta.barid = tb.id where id = #{id}
 	</select>
 	
 	<insert id="save" parameterType="Account">
@@ -17,7 +17,7 @@
 	</insert>
 	
 	<update id="update" parameterType="Account">
-		update t_account set `name`=#{name},password = #{password},role = #{role},barid = #{barid} where id = #{id}
+		update t_account set `name`=#{name},password = #{password} where id = #{id}
 	</update>
 	
 	<delete id="del" parameterType="String">

@@ -18,4 +18,13 @@ public class AccountService {
 	public Account login (Account account) {
 		return accountMapper.login(account);
 	}
+
+	@Transactional(readOnly=true)
+	public Account findById(String id) {
+		return accountMapper.findById(id);
+	}
+
+	public void update(Account account) {
+		accountMapper.update(account);
+	}
 }

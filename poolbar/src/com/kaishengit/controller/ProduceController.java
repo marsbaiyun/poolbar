@@ -44,7 +44,6 @@ public class ProduceController {
 	
 	@RequestMapping(value="/del/{id}",method=RequestMethod.GET)
 	public String delete (@PathVariable("id") String id) {
-		System.out.println(id);
 		produceService.delete(id);
 		return "redirect:/produce/list";
 	}
