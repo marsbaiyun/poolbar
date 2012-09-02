@@ -45,7 +45,7 @@
                 </li>
                 <li class="nav-header">账户信息</li>
                 <li>
-                    <a href="account/inf">
+                    <a href="${basePath }/account/inf">
                         <i class=" icon-eye-open"></i> 
                         个人资料
                     </a>
