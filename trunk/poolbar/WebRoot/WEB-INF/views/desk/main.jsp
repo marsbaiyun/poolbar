@@ -40,13 +40,13 @@
                 </li>
                 <li class="nav-header">账户信息</li>
                 <li>
-                    <a href="#">
+                    <a href="${basePath }/account/inf">
                         <i class=" icon-eye-open"></i> 
                         个人资料
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="${basePath }/account/changepwd">
                         <i class="icon-lock"></i>
                         修改密码
                     </a>
@@ -107,7 +107,7 @@
             </ul>
         </div>
     </div>
-	<form action="change" method="post" class="form-horizontal">
+	<form action="${basePath }/consume/change" method="post" class="form-horizontal">
 	    <div class="modal hide fade in" id="changeDesk">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -119,7 +119,7 @@
 				<div class="control-group">
 					<label class="control-label">请选择台号</label>
 					<div class="controls">
-						<select id="select">
+						<select id="select" name="deskid">
 							<option>--请选择台号--</option>
 						</select>
 					</div>
