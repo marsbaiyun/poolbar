@@ -4,27 +4,35 @@
 <mapper namespace="com.kaishengit.mapper.DeskMapper">
 	<cache/>	
 	
-	<select id="findAll" parameterType="String" resultType="list" resultMap="deskList">
+	<select id="findAll" parameterType="String" resultType="list" resultMap="deskMapper">
 		SELECT td.id,price,td.barid,orderid,starttime FROM t_desk AS td LEFT JOIN t_order AS tor ON td.orderid = tor.id WHERE td.barid = #{barid}
 	</select>
 	
-	<select id="findById" resultType="Desk" parameterType="int">
-		select * from t_desk where id = #{id}
+	<select id="findById" resultType="Desk" parameterType="Desk" resultMap="deskMapper">
+		SELECT td.id,price,td.barid,orderid,starttime
+		FROM t_desk AS td
+		LEFT JOIN t_order AS tor ON td.orderid = tor.id
+		WHERE td.id = #{id} AND td.barid = #{barid}
 	</select>
 	
 	<insert id="save" parameterType="Desk">
 		insert into t_desk(id,price,barid,orderid) values(#{id},#{price},#{barid},#{orderid}) 
 	</insert>
 	
-	<update id="update" parameterType="Desk">
-		update t_desk set price=#{price},barid = #{barid},orderid = #{orderid} where id = #{id}
+	<update id="updateOrderChange" parameterType="Desk">
+		update t_desk set orderid = #{orderid} where id = #{id} and barid = #{barid}
 	</update>
 	
 	<delete id="del" parameterType="String">
 		delete from t_desk where id = #{id}
 	</delete>
 	
-	<resultMap type="Desk" id="deskList">
+	<select id="findEmpty" parameterType="Desk" resultType="list" resultMap="deskMapper">
+		SELECT * FROM t_desk
+		WHERE barid = #{barid} AND orderid IS NULL AND price = #{price}
+	</select>
+	
+	<resultMap type="Desk" id="deskMapper">
 		<id property="id" column="id"/>
 		<id property="barid" column="barid"/>
 		<result property="price" column="price"/>

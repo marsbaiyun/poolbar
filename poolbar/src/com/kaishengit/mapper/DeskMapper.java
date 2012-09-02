@@ -8,11 +8,13 @@ public interface DeskMapper {
 
     public List<Desk> findAll(String barid);
     
-	public Desk findById (int id);
+	public Desk findById (Desk desk);
 	
 	public void save (Desk desk);
 	
-	public void update (Desk desk);
+	public void updateOrderChange (Desk desk);
+	
+	public List<Desk> findEmpty(Desk desk);
 	
 	public void del (int id);
 }
