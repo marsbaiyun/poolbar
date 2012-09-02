@@ -65,4 +65,10 @@ public class DeskController {
         return deskList;
     }
     
+    @RequestMapping("/change")
+    public String change(Desk desk, int deskid) {
+        deskService.changeDesk(desk, deskid);
+        return "redirect:/consume";
+    }
+    
 }
