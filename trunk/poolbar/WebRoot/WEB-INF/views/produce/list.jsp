@@ -126,7 +126,7 @@
 				<div class="control-group">
 					<label class="control-label">价格：</label>
 					<div class="controls">
-					  <input class="span1" type="text"  name="price">元
+					  <input class="span1" type="text"  name="price">&nbsp;&nbsp;元
 					</div>
 				</div>				
 			</form>
@@ -154,7 +154,7 @@
 				<div class="control-group">
 					<label class="control-label">价格：</label>
 					<div class="controls">
-					  <input class="span1" type="text" id="proprice" name="price">元
+					  <input class="span1" type="text" id="proprice" name="price">&nbsp;&nbsp;元
 					</div>
 				</div>				
 			</form>
