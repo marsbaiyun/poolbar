@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="produce/list"> 
+                    <a href="${basePath }/produce/list"> 
                         <i class="icon-barcode"></i>
                         商品管理
                     </a>
@@ -72,28 +72,31 @@
 	                    <div class="thumbnail">
 	                    	<c:choose>
 	                    		<c:when test="${empty desk.order }">
-	                    			<img src="${basePath }/static/img/off.png" alt="" />
+	                    			<img class="imgDiv" src="${basePath }/static/img/off.png" alt="" />
 	                    		</c:when>
 	                    		<c:otherwise>
-	                    			<img src="${basePath }/static/img/on.png" alt="" />
+	                    			<img class="imgDiv" src="${basePath }/static/img/on.png" alt="" />
 	                    		</c:otherwise>
 	                    	</c:choose>
 	                        <div class="caption">
 	                            <table>
 	                                <tr>
-	                                    <td style="width:80%">
-	                                        <a href="${basePath }/consume/open?deskId=${desk.id }" class="btn btn-primary">开台</a>&nbsp;&nbsp;
+	                                    <td style="width:170px">
+	                                    	<input type="hidden" value="${desk.id }" />
+	                                    	<button class="btn btn-primary open">开台</button>&nbsp;&nbsp;
 	                                        <button class="btn btn-success">结账</button>
 	                                        <br/><br/>
-	                                        <button class="btn btn-info">换台</button>&nbsp;&nbsp;
+	                                        <a href="#changeDesk" data-toggle="modal" class="btn btn-info change">换台</a>&nbsp;&nbsp;
 	                                        <button class="btn btn-danger">购物</button>
 	                                    </td>
-	                                    <td>
+	                                    <td class="info" style="width:66px">
 	                                    	${desk.id }号台<br/><br/>
-	                                    	<c:if test="${not (empty desk.order) }">
-		                                    	${fn:substring(desk.order.starttime, 11, fn:length(desk.order.starttime)) }<br/><br/>
-				                    		</c:if>
-	                                    	${desk.price }
+	                                    	<div class="startTime">
+		                                    	<c:if test="${not (empty desk.order) }">
+			                                    	${fn:substring(desk.order.starttime, 11, fn:length(desk.order.starttime)) }
+					                    		</c:if>
+	                                    	</div><br/>
+	                                    	<div class="price">${desk.price }元/时</div>
 	                                    </td>
 	                                </tr>
 	                            </table>
@@ -104,5 +107,78 @@
             </ul>
         </div>
     </div>
+	<form action="change" method="post" class="form-horizontal">
+	    <div class="modal hide fade in" id="changeDesk">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3 id="myModalLabel">换台</h3>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" id="barid" name="barid" value="${account.bar.id }">
+				<input type="hidden" id="deskid" name="id" />
+				<div class="control-group">
+					<label class="control-label">请选择台号</label>
+					<div class="controls">
+						<select id="select">
+							<option>--请选择台号--</option>
+						</select>
+					</div>
+				</div>		
+			</div>
+			<div class="modal-footer">
+				<button type="submit" id="changeBtn" class="btn btn-primary">保存</button>
+				<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript" src=""></script>
+    <script type="text/javascript">
+    	$(document).ready(function() {
+    		$(".open").click(function() {
+    			var img = $(this).parent().parent().parent().parent().parent().siblings(".imgDiv").attr("src");
+    			var imgStr = img.substring(img.lastIndexOf("/") + 1, img.length);
+				if (imgStr == "on.png") {
+					return;
+				} else {
+	    			var id = $(this).siblings("input").val();
+	    			var btn = $(this);
+	    			$.get("${basePath }/consume/open", {"deskId" : id}, function(result) {
+	    				$(btn).parent().parent().parent().parent().parent().siblings(".imgDiv").attr("src","http://localhost/poolbar/static/img/on.png");
+	    				var time = result.order.starttime;
+	    				$(btn).parent().siblings(".info").children(".startTime").text(time.substring(11, time.length));
+	    			});
+				}
+    		});
+    		$(".change").click(function() {
+    			var img = $(this).parent().parent().parent().parent().parent().siblings(".imgDiv").attr("src");
+    			var imgStr = img.substring(img.lastIndexOf("/") + 1, img.length);
+				if (imgStr == "on.png") {
+	    			var id = $(this).siblings("input").val();
+	    			var priceStr = $(this).parent().siblings(".info").children(".price").text();
+	    			var price = priceStr.substring(0, priceStr.lastIndexOf("."));
+	    			var barid = ${account.bar.id };
+	    			$.get("${basePath }/consume/findEmpty", {"id" : id, "price" : price, "barid" : barid}, function(result) {
+	    				if (result.length == 0) {
+	    					$("#select").empty();
+	    					$("#select").append("<option>--暂时没有空球台--</option>");
+	    					$("#changeBtn").hide();
+	    				} else {
+	    					$("#deskid").val(id);
+							$("#select").empty();
+							$("#select").append("<option>--请选择台号--</option>");
+	    					$(result).each(function() {
+								$("#select").append("<option value=" + this.id + ">" + this.id + "号台" + "</option>");
+	    					});
+	    					$("#changeBtn").show();
+	    				}
+	    			});
+    			} else {
+					$("#select").empty();
+	    			$("#select").append("<option>--该球台没有开始，不能换台--</option>");
+	    			$("#changeBtn").hide();
+    			}
+    		});
+    	});
+    </script>
 </body>
 </html>
