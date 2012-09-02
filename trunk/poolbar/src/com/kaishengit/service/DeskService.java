@@ -20,4 +20,11 @@ public class DeskService {
         return deskMapper.findAll(barid);
     }
     
+    public Desk findById(Desk desk) {
+        return deskMapper.findById(desk);
+    }
+    
+    public List<Desk> findEmpty(Desk desk) {
+        return deskMapper.findEmpty(desk);
+    }
 }

@@ -18,11 +18,21 @@ public class OrderService {
     @Autowired
     private DeskMapper deskMapper;
     
-    public void save(Order order) {
+    public Desk save(Order order) {
+        //保存order
         orderMapper.save(order);
-        Desk desk = deskMapper.findById(order.getDeskid());
+        
+        //更新desk的order
+        Desk desk = new Desk();
+        desk.setId(order.getDeskid());
+        desk.setBarid(order.getBarid());
         desk.setOrderid(order.getId());
-        deskMapper.update(desk);
+        deskMapper.updateOrderChange(desk);
+        
+        //将更新后的返回
+        desk = deskMapper.findById(desk);
+        
+        return desk;
     }
     
 }
