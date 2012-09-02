@@ -41,7 +41,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="#"> 
+                    <a href="${basePath }/produce/list"> 
                         <i class="icon-white icon-barcode"></i>
                         商品管理
                     </a>
@@ -54,13 +54,13 @@
                 </li>
                 <li class="nav-header">账户信息</li>
                 <li>
-                    <a href="#">
+                    <a href="${basePath }/account/inf">
                         <i class=" icon-eye-open"></i> 
                         个人资料
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="${basePath }/account/changepwd">
                         <i class="icon-lock"></i>
                         修改密码
                     </a>
