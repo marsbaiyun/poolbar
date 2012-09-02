@@ -5,8 +5,10 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kaishengit.pojo.Account;
@@ -40,9 +42,8 @@ public class DeskController {
         return mav;
     }
     
-    @RequestMapping("/open")
-    public String open(int deskId, HttpSession session) {
-        
+    @RequestMapping(value="/open",produces=MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Desk open(int deskId, HttpSession session) {
         Account account = (Account) session.getAttribute("account");
         Bar bar = account.getBar();
         
@@ -53,9 +54,15 @@ public class DeskController {
         order.setDeskid(deskId);
         order.setBarid(bar.getId());
         order.setAccountid(account.getId());
-        orderService.save(order);
+        Desk desk = orderService.save(order);
         
-        
-        return "redirect:/consume";
+        return desk;
     }
+    
+    @RequestMapping(value="/findEmpty",produces=MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody() List<Desk> findEmpty(Desk desk) {
+        List<Desk> deskList = deskService.findEmpty(desk);
+        return deskList;
+    }
+    
 }
