@@ -34,5 +34,9 @@ public class OrderService {
         
         return desk;
     }
+
+    public Order findById(String id) {
+        return orderMapper.findById(id);
+    }
     
 }
