@@ -15,4 +15,6 @@ public interface VipMapper {
 	public void del (String id);
 
 	public List<Vip> findAll();
+
+	public List<Vip> find(Vip vip);
 }

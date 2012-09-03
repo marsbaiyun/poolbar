@@ -13,76 +13,23 @@
 	
     <div id="content" class="container">
         <div class="span3">
-            <%@ include file="../include/role.jsp" %>
-         
-            <ul class="nav nav-list well">
-                <li class="nav-header">账目管理</li>
-                <li>
-                    <a href="#">
-                        <i class="icon-time"></i>
-                        球台管理
-                    </a>
-                </li>
-                <li  class="active">
-                    <a href="#"> 
-                        <i class="icon-user"></i>
-                        会员管理
-                    </a>
-                </li>
-                <li>
-                    <a href="#"> 
-                        <i class="icon-white icon-barcode"></i>
-                        商品管理
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-signal"></i>
-                        统计信息
-                    </a>
-                </li>
-                <li class="nav-header">账户信息</li>
-                <li>
-                    <a href="#">
-                        <i class=" icon-eye-open"></i> 
-                        个人资料
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-lock"></i>
-                        修改密码
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-gift"></i>
-                        更改主题
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-adjust"></i>
-                        球吧管理
-                    </a>
-                </li>
-            </ul>
+            <%@ include file="../include/role.jsp" %> 
         </div>
         <div class="span9 pull-right" style="margin-right:30px">
             <ul class="breadcrumb">
                 <li class="active">会员管理 / 添加会员</li>
             </ul>
-			<form class="form-horizontal" action="${basePath }/vip/new" method="post" style="margin-top:30px;border:1px solid #ddd;padding-top:20px;">
-				<div class="control-group">
-					<label class="control-label">姓名：</label>
+			<form id="myform" class="form-horizontal" action="${basePath }/vip/new" method="post" style="margin-top:30px;border:1px solid #ddd;padding-top:20px;">
+				<div class="control-group" id="nameDiv">
+					<label class="control-label" >姓名：</label>
 					<div class="controls">
-					  <input type="text" name="name">
+					  <input type="text" name="name" id="name">
 					</div>
 				</div>
-				<div class="control-group">
+				<div class="control-group" id="passwordDiv">
 					<label class="control-label">密码：</label>
 					<div class="controls">
-					  <input type="password" name="password">
+					  <input type="password" name="password" id="password">
 					</div>
 				</div>
 				<div class="control-group">
@@ -93,11 +40,43 @@
 				</div>
 				<div class="control-group">
 					<div class="controls">
-					  <input value="添加" type="submit" class="btn btn-primary">
+						 <input value="添加" type="button" id="btn" class="btn btn-primary">
+						 <a href="${basePath }/vip/list" class="btn">返回</a>
 					</div>
 				</div>
 			</form>
         </div>
     </div>
+    <script type="text/javascript">
+    	$(document).ready(function() {
+    		$("#name").blur(function() {
+    			if($(this).val() == ""){
+    				$("#nameDiv").addClass("error");
+    			}
+    		});
+    		$("#name").focus(function() {
+    			$("#nameDiv").removeClass("error");
+    		});
+
+    		$("#password").blur(function() {
+    			if($(this).val() == ""){
+    				$("#passwordDiv").addClass("error");
+    			}
+    		});
+    		$("#password").focus(function() {
+    			$("#passwordDiv").removeClass("error");
+    		});
+    		
+    		$("#btn").click(function() {
+    			if($("#name").val() == ""){
+    				$("#nameDiv").addClass("error");
+    			} else if($("#password").val() == "") {
+    				$("#passwordDiv").addClass("error");
+    			} else{
+    				$("#myform").submit();
+    			}
+    		});
+    	});
+    </script>
 </body>
 </html>

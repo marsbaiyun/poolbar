@@ -3,29 +3,38 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kaishengit.mapper.VipMapper">
 	<cache/>	
-	
+	<select id="find" resultType="list" resultMap="findVip">
+		select id,name,password,tel,money,discount from t_vip 
+		<where>
+			<if test="name !='' ">name like #{name}</if>
+			<if test="tel != '' ">and tel like #{tel}</if>
+		</where>
+		order by discount  asc
+	</select>
 	<select id="findById" resultType="Vip" parameterType="String">
 		select * from t_vip where id = #{id}
 	</select>
 	<select id="findAll" resultType="list" resultMap="findVip">
-		select id ,name,password,tel,discount from t_vip order by discount  asc
+		select id ,name,password,tel,money,discount from t_vip order by id  asc
 	</select>
 	<resultMap type="Vip" id="findVip">
 		<id property="id" column="id"/>
 		<result property="name" column="name"/>
 		<result property="password" column="password"/>
 		<result property="tel" column="tel"/>
+		<result property="money" column="money"/>
 		<result property="discount" column="discount"/>
 	</resultMap>		
 	<insert id="save" parameterType="Vip">
-		insert into t_vip(id,`name`,password,tel,discount) values(#{id},#{name},#{password},#{tel},#{discount}) 
+		insert into t_vip(id,`name`,password,tel,money,discount) values(#{id},#{name},#{password},#{tel},#{money},#{discount}) 
 	</insert>
 	
 	<update id="update" parameterType="Vip">
-		update t_vip set `name` = #{name},password = #{password},tel = #{tel},discount = #{discount} where id = #{id}
+		update t_vip set `name` = #{name},password = #{password},tel = #{tel},money = #{money},discount = #{discount} where id = #{id}
 	</update>
 	
 	<delete id="del" parameterType="String">
 		delete from t_vip where id = #{id}
 	</delete>
+	
 </mapper>

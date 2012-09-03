@@ -42,4 +42,9 @@ public class VipService {
 		
 	}
 
+	public List<Vip> find(Vip vip) {
+		
+		return vipMapper.find(vip);
+	}
+
 }
