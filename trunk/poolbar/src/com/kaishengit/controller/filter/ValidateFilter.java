@@ -31,8 +31,7 @@ public class ValidateFilter extends AbstractFilter {
 			HttpSession session = request.getSession();
 			Account account = (Account) session.getAttribute("account");
 			if(account == null){
-				String error = "ÇëÏÈµÇÂ¼";
-				response.sendRedirect("home?errormsg=" + error);
+				response.sendRedirect("/poolbar/home?code=1001");
 			} else {
 				chain.doFilter(request, response);
 			}

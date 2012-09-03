@@ -39,6 +39,13 @@
 						<strong>${errormsg }</strong>
 					</div>
 				</c:if>
+        		<c:if test="${param.code == '1001' }">
+					<div class="alert alert-error">
+						<button class="close" data-dismiss="alert">×</button>
+						<strong>请先登录！</strong>
+					</div>
+				</c:if>
+				
             <form action="${basePath }/login" method="post" id="myform">
             	<fieldset>
                     <div id="namediv" class="control-group">
