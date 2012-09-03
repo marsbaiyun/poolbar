@@ -71,13 +71,22 @@
             </ul>
         </div>
         <div class="span9 pull-right" style="margin-right:30px">
+				<c:if test="${param.code == '001' }">
+					<div class="alert alert-success">
+						<button class="close" data-dismiss="alert">×</button>
+						<strong>修改成功！</strong>
+					</div>
+				</c:if>
+				
+
+        
 			<form id="accountinf" class="form-horizontal" action="${basePath}/account/edite" method="post">
 				<fieldset>
-					<input type="hidden" name="id" value="${account.id }">
-					<div class="control-group">
+					<div id="namediv" class="control-group">
 						<label class="control-label" for="focusedInput">用户名：</label>
 						<div class="controls">
 							<input id="accountname" class="input-xlarge focused" type="text" name="name" value="${account.name }">
+							<span class="help-block" id="span1"></span>
 						</div>
 					</div>				
 					<div class="control-group">
@@ -93,14 +102,49 @@
 						</div>
 					</div>	
 					<div class="form-actions">
-						<button class="btn btn-primary" type="submit">修改</button>
+						<button class="btn btn-primary" id="edite">修改</button>
 						<button class="btn" onclick="location.back()">返回</button>
 					</div>								
 				</fieldset>
 			</form>
-			
 
         </div>
     </div>
+    
+    <script type="text/javascript">
+    	$(document).ready(function() {
+    		var oldname = $("#accountname").val();
+    		$("#accountname").blur(function () {
+	    		var newname = $(this).val();
+	    		if (newname != oldname) {
+		    		$.post("${basePath}/account/checkname",{"newname":newname},function (result) {
+		    			if (result.id != undefined) {
+			                $("#span1").html("该用户名已存在！");
+		                    $("#namediv").addClass("error");
+		    			} else {
+			                $("#span1").html("该用户名可以使用！");
+			                $("#namediv").removeClass("error");
+		    			}
+		    			
+		    		});
+	    		} 
+	    	});
+	    	
+	    	$("#accountname").focus(function () {
+	    		$("#namediv").removeClass("error");
+	    		$("#span1").html("");
+	    	});
+	    	
+	    	$("#edite").click(function () {
+	    		$("#accountname").blur();
+	    		var msg = $("#span1").html();
+	    		if (msg != "该用户名已存在！") {
+	    			$("#accountinf").submit();
+	    		} else {
+	    			return false;
+	    		}
+	    	});
+    	});
+    </script>
 </body>
 </html>
