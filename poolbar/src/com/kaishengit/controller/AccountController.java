@@ -6,10 +6,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kaishengit.pojo.Account;
@@ -28,12 +31,15 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value="/edite",method=RequestMethod.POST)
-	public String edite (Account account,HttpSession session) {
+	public ModelAndView edite (Account account,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
 		Account a = (Account) session.getAttribute("account");
 		a.setName(account.getName());
 		accountService.update(a);
 		session.setAttribute("account", a);
-		return "redirect:/account/inf";
+		mav.setViewName("redirect:/account/inf");
+		mav.addObject("code", "001");
+		return mav;
 	}
 
 	@RequestMapping(value="/changepwd",method=RequestMethod.GET)
@@ -58,4 +64,11 @@ public class AccountController {
 			return mav;
 		}
 	}
+	
+	@RequestMapping(value="/checkname",produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Account checkname (String newname) {
+		Account a = accountService.findByName(newname);
+		return a;
+	}
+	
 }
