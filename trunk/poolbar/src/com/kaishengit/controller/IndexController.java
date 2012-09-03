@@ -21,8 +21,8 @@ public class IndexController {
 	public String login (HttpSession session,Account account,RedirectAttributes redirectAttributes) {
 		Account a = accountService.login(account);
 		if (a == null) {
-			redirectAttributes.addFlashAttribute("error", "用户名或者密码错误！");
-			redirectAttributes.addFlashAttribute("account", a);
+			redirectAttributes.addFlashAttribute("errormsg", "用户名或者密码错误！");
+			redirectAttributes.addFlashAttribute("account", account);
 			return "redirect:/home";
 		} else {
 			session.setAttribute("account", a);
