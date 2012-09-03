@@ -33,10 +33,6 @@
 		update t_vip set `name` = #{name},password = #{password},tel = #{tel},money = #{money},discount = #{discount} where id = #{id}
 	</update>
 	
-	<update id="updateDiscount" parameterType="Vip">
-		update t_vip set discount = #{discount} where id = #{id}
-	</update>
-	
 	<delete id="del" parameterType="int">
 		delete from t_vip where id = #{id}
 	</delete>

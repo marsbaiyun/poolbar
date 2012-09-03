@@ -12,8 +12,6 @@ public interface VipMapper {
 	
 	public void update(Vip vip);
 
-	public void updateDiscount(Vip vip);
-	
 	public void del (int id);
 
 	public List<Vip> findAll();

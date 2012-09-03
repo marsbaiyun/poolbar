@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kaishengit.pojo.Account;
 import com.kaishengit.pojo.Bar;
@@ -120,8 +121,9 @@ public class DeskController {
     }
     
     @RequestMapping("/checkout")
-    public String checkout(Order order, String select) {
-        orderService.checkout(order, select);
-        return "redirect:/consume?code=103";
+    public String checkout(Order order, String select, RedirectAttributes redirectAttributes) {
+        int[] money = orderService.checkout(order, select);
+        redirectAttributes.addFlashAttribute("code", "结账成功，账单金额" + money[0] + "元，卡内扣除" + money[1] + "元，应付现金" + money[2] + "元。");
+        return "redirect:/consume";
     }
 }

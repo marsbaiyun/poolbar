@@ -15,17 +15,26 @@
         </div>
         <div class="span9 pull-right" style="margin-right:30px">
         	
-        			<div class="alert alert-success">
-						<button class="close" data-dismiss="alert">×</button>
 						<c:choose>
 			        		<c:when test="${param.code == '101' }">
-								<strong>购买商品成功！</strong>
+			        			<div class="alert alert-success">
+									<button class="close" data-dismiss="alert">×</button>
+									<strong>购买商品成功！</strong>
+								</div>
 							</c:when>
 							<c:when test="${param.code == '102' }">
-								<strong>换台成功，请会员到新球台！</strong>
+								<div class="alert alert-success">
+									<button class="close" data-dismiss="alert">×</button>
+									<strong>换台成功，请会员到新球台！</strong>
+								</div>
 							</c:when>
 			        	</c:choose>
-					</div>
+			        	<c:if test="${code != null }">
+			        		<div class="alert alert-success">
+								<button class="close" data-dismiss="alert">×</button>
+								<strong>${code }</strong>
+							</div>
+						</c:if>
         		
             <ul class="thumbnails">
                 <c:forEach items="${deskList }" var="desk">
