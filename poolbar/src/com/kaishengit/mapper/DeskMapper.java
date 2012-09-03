@@ -12,6 +12,8 @@ public interface DeskMapper {
 	
 	public void save (Desk desk);
 	
+	public void checkout(String orderid);
+	
 	public void updateOrderChange (Desk desk);
 	
 	public List<Desk> findEmpty(Desk desk);

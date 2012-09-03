@@ -23,6 +23,10 @@
 		update t_desk set orderid = #{orderid} where id = #{id} and barid = #{barid}
 	</update>
 	
+	<update id="checkout" parameterType="String">
+		update t_desk set orderid = null where orderid = #{orderid}
+	</update>
+	
 	<delete id="del" parameterType="String">
 		delete from t_desk where id = #{id}
 	</delete>

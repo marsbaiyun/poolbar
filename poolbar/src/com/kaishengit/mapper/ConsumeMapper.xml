@@ -5,7 +5,16 @@
 	<cache/>	
 	
 	<select id="findById" resultType="Consume" parameterType="String">
-		select * from t_bar where id = #{id}
+		select * from t_consume where id = #{id}
+	</select>
+	<select id="findByProduceId" parameterType="Consume" resultType="Consume">
+		select * from t_consume where produceid = #{produceid} and orderid = #{orderid}
+	</select>
+	
+	<select id="findByOrderId" parameterType="String" resultType="list" resultMap="consumeList">
+		SELECT tc.id AS id, num, orderid, tp.id AS produceid, `name`, price FROM t_consume AS tc
+		LEFT JOIN t_produce AS tp ON tc.produceid = tp.id
+		WHERE orderid = #{id}
 	</select>
 	
 	<insert id="save" parameterType="Consume">
@@ -13,10 +22,21 @@
 	</insert>
 	
 	<update id="update" parameterType="Consume">
-		update t_consume set produceid=#{produceid},num = #{num},barid = #{orderid} where id = #{id}
+		update t_consume set produceid=#{produceid},num = #{num},orderid = #{orderid} where id = #{id}
 	</update>
 	
 	<delete id="del" parameterType="String">
 		delete from t_consume where id = #{id}
 	</delete>
+	
+	<resultMap type="Consume" id="consumeList">
+		<id property="id" column="id" />
+		<result property="num" column="num" />
+		<result property="orderid" column="orderid" />
+		<association property="produce" javaType="Produce" column="produceid">
+			<id property="id" column="produceid" />
+			<result property="name" column="name" />
+			<result property="price" column="price" />
+		</association>
+	</resultMap>
 </mapper>

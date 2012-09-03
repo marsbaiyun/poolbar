@@ -17,9 +17,12 @@ import com.kaishengit.pojo.Consume;
 import com.kaishengit.pojo.Desk;
 import com.kaishengit.pojo.Order;
 import com.kaishengit.pojo.Produce;
+import com.kaishengit.pojo.Vip;
+import com.kaishengit.service.ConsumeService;
 import com.kaishengit.service.DeskService;
 import com.kaishengit.service.OrderService;
 import com.kaishengit.service.ProduceService;
+import com.kaishengit.service.VipService;
 import com.kaishengit.util.DateUtil;
 import com.kaishengit.util.PKUtil;
 
@@ -33,6 +36,10 @@ public class DeskController {
     private OrderService orderService;
     @Autowired
     private ProduceService produceService;
+    @Autowired
+    private ConsumeService consumeService;
+    @Autowired
+    private VipService vipService;
     
     @RequestMapping("")
     public ModelAndView toMain(HttpSession session) {
@@ -78,25 +85,43 @@ public class DeskController {
     @RequestMapping("/change")
     public String change(Desk desk, int deskid) {
         deskService.changeDesk(desk, deskid);
-        return "redirect:/consume";
+        return "redirect:/consume?code=102";
     }
     
     @RequestMapping("/shop")
     public String shop(Desk desk, Consume consume) {
         deskService.shop(desk, consume);
-        return "redirect:/consume";
+        return "redirect:/consume?code=101";
     }
     
-    @RequestMapping(value="/checkout")
+    @RequestMapping(value="/detail")
     public ModelAndView getCheck(Desk desk) {
         ModelAndView mav = new ModelAndView();
+        //根据桌号查找order
         desk = deskService.findById(desk);
         Order order = orderService.findById(desk.getOrder().getId());
+        
+        //先设置结束时间和当前金额，不更新到数据库，仅仅显示在页面
         order.setEndtime(DateUtil.getNow());
         order.setTotal((float) Math.ceil(DateUtil.getDiff(order.getStarttime(), order.getEndtime()) * desk.getPrice()));
+        
+        //查询订单购买的商品
+        List<Consume> consumeList = consumeService.findByOrderId(order.getId());
         mav.addObject("order", order);
         mav.addObject("diff", DateUtil.getDiff(order.getStarttime(), order.getEndtime()));
+        mav.addObject("consumeList", consumeList);
         mav.setViewName("desk/checkout");
         return mav;
+    }
+    
+    @RequestMapping(value="/checkVip",produces=MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Vip checkVip(int id) {
+        return vipService.findById(id);
+    }
+    
+    @RequestMapping("/checkout")
+    public String checkout(Order order, String select) {
+        orderService.checkout(order, select);
+        return "redirect:/consume?code=103";
     }
 }

@@ -11,7 +11,7 @@
 		</where>
 		order by discount  asc
 	</select>
-	<select id="findById" resultType="Vip" parameterType="String">
+	<select id="findById" resultType="Vip" parameterType="int">
 		select * from t_vip where id = #{id}
 	</select>
 	<select id="findAll" resultType="list" resultMap="findVip">
@@ -33,7 +33,11 @@
 		update t_vip set `name` = #{name},password = #{password},tel = #{tel},money = #{money},discount = #{discount} where id = #{id}
 	</update>
 	
-	<delete id="del" parameterType="String">
+	<update id="updateDiscount" parameterType="Vip">
+		update t_vip set discount = #{discount} where id = #{id}
+	</update>
+	
+	<delete id="del" parameterType="int">
 		delete from t_vip where id = #{id}
 	</delete>
 	

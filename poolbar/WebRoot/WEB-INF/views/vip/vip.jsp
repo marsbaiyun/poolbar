@@ -29,7 +29,7 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>序号</th>
+                        <th>ID</th>
                         <th>姓名</th>
                         <th>联系方式</th>
                         <th>余额</th>

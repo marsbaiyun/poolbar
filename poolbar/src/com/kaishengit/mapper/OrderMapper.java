@@ -10,5 +10,7 @@ public interface OrderMapper {
 	
 	public void update (Order order);
 	
+	public int findByVipId(int vipid);
+	
 	public void del (String id);
 }

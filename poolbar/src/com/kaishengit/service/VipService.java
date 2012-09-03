@@ -32,12 +32,12 @@ public class VipService {
 		
 	}
 
-	public Vip findById(String id) {
+	public Vip findById(int id) {
 		
 		return vipMapper.findById(id);
 	}
 
-	public void del(String id) {
+	public void del(int id) {
 		vipMapper.del(id);
 		
 	}

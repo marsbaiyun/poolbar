@@ -62,9 +62,20 @@ public class DeskService {
     }
 
     public void shop(Desk desk, Consume consume) {
+        //获取球桌的order
         desk = deskMapper.findById(desk);
         consume.setOrderid(desk.getOrder().getId());
-        consume.setId(PKUtil.getPK());
-        consumeMapper.save(consume);
+        
+        //根据consume获取是否已购买过该商品
+        Consume consume2 = consumeMapper.findByProduceId(consume);
+        //未购买，添加
+        if (consume2 == null) {
+            consume.setId(PKUtil.getPK());
+            consumeMapper.save(consume);
+        } else {
+            //已购买，修改
+            consume2.setNum(consume2.getNum() + consume.getNum());
+            consumeMapper.update(consume2);
+        }
     }
 }

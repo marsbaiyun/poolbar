@@ -44,7 +44,7 @@ public class VipController {
 	}
 	//³äÖµ
 	@RequestMapping(value="/recharge",method=RequestMethod.GET)
-	public ModelAndView recharge(String id) {
+	public ModelAndView recharge(int id) {
 		Vip vip = vipService.findById(id);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("vip/vip-recharge");
@@ -66,7 +66,7 @@ public class VipController {
 	}
 	
 	@RequestMapping(value="/edit", method=RequestMethod.GET)
-	public ModelAndView editVip(String id){
+	public ModelAndView editVip(int id){
 		Vip vip = vipService.findById(id);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("vip/vip-edit");
@@ -76,7 +76,7 @@ public class VipController {
 	
 	//É¾³ý
 	@RequestMapping("del/{id}")
-	public String delVip(@PathVariable("id") String id){
+	public String delVip(@PathVariable("id") int id){
 		
 		vipService.del(id);
 		return "redirect:/vip/list";
