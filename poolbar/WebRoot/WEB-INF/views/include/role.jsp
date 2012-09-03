@@ -37,15 +37,15 @@
           </a>
       </li>
       <li class="nav-header">账户信息</li>
-      <li>
+      <li id="infLi">
           <a href="${basePath }/account/inf">
-              <i class=" icon-eye-open"></i> 
+              <i class=" icon-eye-open" id="inf"></i> 
               个人资料
           </a>
       </li>
-      <li>
+      <li id="changepwdLi">
           <a href="${basePath }/account/changepwd">
-              <i class="icon-lock"></i>
+              <i class="icon-lock" id="changepwd"></i>
               修改密码
           </a>
       </li>
@@ -65,15 +65,21 @@
   <script type="text/javascript">
     	$(document).ready(function() {
     		var url = window.location.href;
-    		if(url.search("/desk") != -1){
+    		if(url.search("/consume") != -1){
     			$("#deskLi").addClass("active");
     			$("#desk").addClass("icon-white");
     		} else if (url.search("/vip") != -1){
     			$("#vipLi").addClass("active");
     			$("#vip").addClass("icon-white");
-    		}else if (url.search("/produce") != -1){
+    		} else if (url.search("/produce") != -1){
     			$("#produceLi").addClass("active");
     			$("#produce").addClass("icon-white");
+    		} else if (url.search("/account/inf") != -1) {
+    			$("#infLi").addClass("active");
+    			$("#inf").addClass("icon-white");
+    		} else if (url.search("/account/changepwd") != -1) {
+    			$("#changepwdLi").addClass("active");
+    			$("#changepwd").addClass("icon-white");
     		}
     	});
     </script>
