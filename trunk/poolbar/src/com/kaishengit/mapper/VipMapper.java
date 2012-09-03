@@ -6,13 +6,15 @@ import com.kaishengit.pojo.Vip;
 
 public interface VipMapper {
 
-	public Vip findById (String id);
+	public Vip findById (int id);
 	
 	public void save (Vip vip);
 	
 	public void update(Vip vip);
+
+	public void updateDiscount(Vip vip);
 	
-	public void del (String id);
+	public void del (int id);
 
 	public List<Vip> findAll();
 

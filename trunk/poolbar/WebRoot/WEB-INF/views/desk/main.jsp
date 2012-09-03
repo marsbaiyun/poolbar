@@ -14,6 +14,19 @@
             <%@ include file="../include/role.jsp" %>
         </div>
         <div class="span9 pull-right" style="margin-right:30px">
+        	
+        			<div class="alert alert-success">
+						<button class="close" data-dismiss="alert">×</button>
+						<c:choose>
+			        		<c:when test="${param.code == '101' }">
+								<strong>购买商品成功！</strong>
+							</c:when>
+							<c:when test="${param.code == '102' }">
+								<strong>换台成功，请会员到新球台！</strong>
+							</c:when>
+			        	</c:choose>
+					</div>
+        		
             <ul class="thumbnails">
                 <c:forEach items="${deskList }" var="desk">
 	                <li class="span3">
@@ -32,10 +45,10 @@
 	                                    <td style="width:170px">
 	                                    	<input type="hidden" value="${desk.id }" />
 	                                    	<button class="btn btn-primary open">开台</button>&nbsp;&nbsp;
-	                                        <button class="btn btn-success checkout">结账</button>
+	                                        <a href="#shopSome" data-toggle="modal" class="btn btn-danger shop">购物</a>
 	                                        <br/><br/>
 	                                        <a href="#changeDesk" data-toggle="modal" class="btn btn-info change">换台</a>&nbsp;&nbsp;
-	                                        <a href="#shopSome" data-toggle="modal" class="btn btn-danger shop">购物</a>
+	                                        <button class="btn btn-success checkout">详情</button>
 	                                    </td>
 	                                    <td class="info" style="width:66px">
 	                                    	${desk.id }号台<br/><br/>
@@ -192,7 +205,7 @@
 				if (imgStr == "on.png") {
 					var barid = ${account.bar.id };
 					var id = $(this).siblings("input").val();
-					window.location.href = "${basePath }/consume/checkout?id=" + id + "&barid=" + barid;
+					window.location.href = "${basePath }/consume/detail?id=" + id + "&barid=" + barid;
 				} else {
 					alert("还没有开台，不能结账！");
 				}

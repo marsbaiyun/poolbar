@@ -8,12 +8,16 @@
 		select * from t_order where id = #{id}
 	</select>
 	
+	<select id="findByVipId" parameterType="int" resultType="int">
+		SELECT COUNT(total) FROM t_order WHERE vipid = #{vipid}
+	</select>
+	
 	<insert id="save" parameterType="Order">
 		insert into t_order(id,starttime,endtime,total,vipid,deskid,barid,accountid) values(#{id},#{starttime},#{endtime},#{total},#{vipid},#{deskid},#{barid},#{accountid}) 
 	</insert>
 	
 	<update id="update" parameterType="Order">
-		update t_order set starttime=#{starttime},endtime = #{endtime},total=#{total},vipid = #{vipid},deskid=#{deskid},barid = #{barid},accountid=#{accountid} where id = #{id}
+		update t_order set endtime = #{endtime},total=#{total},vipid = #{vipid} where id = #{id}
 	</update>
 	
 	<delete id="del" parameterType="String">

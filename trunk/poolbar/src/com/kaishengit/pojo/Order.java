@@ -11,7 +11,7 @@ public class Order {
 	private Bar bar;
 	private Account account;
 	
-	private String vipid;
+	private Integer vipid;
 	private int deskid;
 	private String barid;
 	private String accountid;
@@ -64,10 +64,10 @@ public class Order {
 	public void setAccount(Account account) {
 		this.account = account;
 	}
-	public String getVipid() {
+	public Integer getVipid() {
 		return vipid;
 	}
-	public void setVipid(String vipid) {
+	public void setVipid(Integer vipid) {
 		this.vipid = vipid;
 	}
 	public int getDeskid() {
