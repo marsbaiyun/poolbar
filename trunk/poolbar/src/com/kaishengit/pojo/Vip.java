@@ -2,19 +2,15 @@ package com.kaishengit.pojo;
 
 public class Vip {
 
-	private String id;
+	private int id;
 	private String name;
 	private String password;
 	private String tel;
 	private float discount;
+	private int money;
 	
 	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+
 	public String getName() {
 		return name;
 	}
@@ -38,6 +34,18 @@ public class Vip {
 	}
 	public void setDiscount(float discount) {
 		this.discount = discount;
+	}
+	public void setMoney(int money) {
+		this.money = money;
+	}
+	public int getMoney() {
+		return money;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getId() {
+		return id;
 	}
 	
 	
