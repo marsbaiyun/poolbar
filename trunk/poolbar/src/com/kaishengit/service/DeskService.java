@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kaishengit.mapper.ConsumeMapper;
 import com.kaishengit.mapper.DeskMapper;
 import com.kaishengit.mapper.OrderMapper;
+import com.kaishengit.pojo.Consume;
 import com.kaishengit.pojo.Desk;
 import com.kaishengit.pojo.Order;
+import com.kaishengit.util.PKUtil;
 
 @Service
 @Transactional
@@ -19,6 +22,8 @@ public class DeskService {
     private DeskMapper deskMapper;
     @Autowired
     private OrderMapper orderMapper;
+    @Autowired
+    private ConsumeMapper consumeMapper;
     
     public List<Desk> findAll(String barid) {
         return deskMapper.findAll(barid);
@@ -54,5 +59,12 @@ public class DeskService {
         order.setDeskid(deskId);
         orderMapper.update(order);
         
+    }
+
+    public void shop(Desk desk, Consume consume) {
+        desk = deskMapper.findById(desk);
+        consume.setOrderid(desk.getOrder().getId());
+        consume.setId(PKUtil.getPK());
+        consumeMapper.save(consume);
     }
 }

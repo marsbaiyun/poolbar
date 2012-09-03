@@ -9,11 +9,11 @@
 	</select>
 	
 	<insert id="save" parameterType="Consume">
-		insert into t_consume(id,produceid,num,barid) values(#{id},#{produceid},#{num},#{barid}) 
+		insert into t_consume(id,produceid,num,orderid) values(#{id},#{produceid},#{num},#{orderid}) 
 	</insert>
 	
 	<update id="update" parameterType="Consume">
-		update t_consume set produceid=#{produceid},num = #{num},barid = #{barid} where id = #{id}
+		update t_consume set produceid=#{produceid},num = #{num},barid = #{orderid} where id = #{id}
 	</update>
 	
 	<delete id="del" parameterType="String">

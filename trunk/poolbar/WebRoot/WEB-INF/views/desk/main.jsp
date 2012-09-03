@@ -84,10 +84,10 @@
 	                                    <td style="width:170px">
 	                                    	<input type="hidden" value="${desk.id }" />
 	                                    	<button class="btn btn-primary open">开台</button>&nbsp;&nbsp;
-	                                        <button class="btn btn-success">结账</button>
+	                                        <button class="btn btn-success checkout">结账</button>
 	                                        <br/><br/>
 	                                        <a href="#changeDesk" data-toggle="modal" class="btn btn-info change">换台</a>&nbsp;&nbsp;
-	                                        <button class="btn btn-danger">购物</button>
+	                                        <a href="#shopSome" data-toggle="modal" class="btn btn-danger shop">购物</a>
 	                                    </td>
 	                                    <td class="info" style="width:66px">
 	                                    	${desk.id }号台<br/><br/>
@@ -126,7 +126,37 @@
 				</div>		
 			</div>
 			<div class="modal-footer">
-				<button type="submit" id="changeBtn" class="btn btn-primary">保存</button>
+				<button type="submit" id="changeBtn" class="btn btn-primary">确定</button>
+				<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+			</div>
+		</div>
+	</form>
+	<form action="${basePath }/consume/shop" method="post" class="form-horizontal">
+	    <div class="modal hide fade in" id="shopSome">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3 id="myModalLabel">购买商品</h3>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" id="barid" name="barid" value="${account.bar.id }">
+				<input type="hidden" id="deskid2" name="id" />
+				<div class="control-group">
+					<label class="control-label">请选择商品</label>
+					<div class="controls">
+						<select id="produceList" name="produceid" class="span4">
+							<option>--请选择商品--</option>
+						</select>
+					</div>
+				</div>
+				<div class="control-group" id="proNum">
+					<label class="control-label">数量</label>
+					<div class="controls">
+						<input type="text" class="span3" name="num" />
+					</div>
+				</div>	
+			</div>
+			<div class="modal-footer">
+				<button type="submit" id="shopBtn" class="btn btn-primary">购买</button>
 				<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
 			</div>
 		</div>
@@ -177,6 +207,47 @@
 	    			$("#select").append("<option>--该球台没有开始，不能换台--</option>");
 	    			$("#changeBtn").hide();
     			}
+    		});
+    		$(".shop").click(function() {
+    			var img = $(this).parent().parent().parent().parent().parent().siblings(".imgDiv").attr("src");
+    			var imgStr = img.substring(img.lastIndexOf("/") + 1, img.length);
+				if (imgStr == "on.png") {
+					var barid = ${account.bar.id };
+					var id = $(this).siblings("input").val();
+					$.get("${basePath }/consume/getPro", {"barid" : barid}, function(result) {
+						if (result.length == 0) {
+							$("#produceList").empty();
+			    			$("#produceList").append("<option>--球吧内暂时没有商品，请稍后--</option>");
+			    			$("#shopBtn").hide();
+			    			$("#proNum").hide();
+						} else {
+							$("#deskid2").val(id);
+							$("#produceList").empty();
+							$("#produceList").append("<option>--请选择商品--</option>");
+	    					$(result).each(function() {
+								$("#produceList").append("<option value=" + this.id + ">" + this.name + "  (" + this.price + "元)</option>");
+	    					});
+	    					$("#shopBtn").show();
+	    					$("#proNum").show();
+						}
+					});
+				} else {
+					$("#produceList").empty();
+	    			$("#produceList").append("<option>--该球台没有开始，不能购买商品--</option>");
+	    			$("#shopBtn").hide();
+	    			$("#proNum").hide();
+				}
+    		});
+    		$(".checkout").click(function() {
+    			var img = $(this).parent().parent().parent().parent().parent().siblings(".imgDiv").attr("src");
+    			var imgStr = img.substring(img.lastIndexOf("/") + 1, img.length);
+				if (imgStr == "on.png") {
+					var barid = ${account.bar.id };
+					var id = $(this).siblings("input").val();
+					window.location.href = "${basePath }/consume/checkout?id=" + id + "&barid=" + barid;
+				} else {
+					alert("还没有开台，不能结账！");
+				}
     		});
     	});
     </script>
