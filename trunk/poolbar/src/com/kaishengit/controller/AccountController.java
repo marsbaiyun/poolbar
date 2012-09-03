@@ -49,7 +49,6 @@ public class AccountController {
 	
 	@RequestMapping(value="/updatepwd",method=RequestMethod.POST)
 	public ModelAndView updatepwd (String oldpwd,String newpwd,HttpSession session,Model model) {
-		System.out.println(oldpwd);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/account/changepwd");
 		Account a = (Account) session.getAttribute("account");
