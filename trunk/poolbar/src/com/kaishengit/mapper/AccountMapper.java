@@ -13,4 +13,6 @@ public interface AccountMapper {
 	public void update (Account account);
 	
 	public void del (String id);
+
+	public Account findByName(String newname);
 }

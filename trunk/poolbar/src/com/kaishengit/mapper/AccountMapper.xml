@@ -12,6 +12,11 @@
 		SELECT ta.id,ta.`name` AS accountname,`password`,role,tb.id AS barid,tb.name AS barname,address,desknum FROM t_account AS ta LEFT JOIN t_bar AS tb ON ta.barid = tb.id where id = #{id}
 	</select>
 	
+	<select id="findByName" resultType="Account" parameterType="String" resultMap="accountMap">
+		SELECT ta.id,ta.`name` AS accountname,`password`,role,tb.id AS barid,tb.name AS barname,address,desknum FROM t_account AS ta LEFT JOIN t_bar AS tb ON ta.barid = tb.id where ta.name = #{newname}
+	</select>
+	
+	
 	<insert id="save" parameterType="Account">
 		insert into t_account(id,`name`,password,role,barid) values(#{id},#{name},#{password},#{role},#{barid}) 
 	</insert>
