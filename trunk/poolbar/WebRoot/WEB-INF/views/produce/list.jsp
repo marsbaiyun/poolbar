@@ -13,71 +13,7 @@
 	
     <div id="content" class="container">
         <div class="span3">
-            <table>
-                <tr>
-                    <td style="width:60%"><img src="${basePath }/static/img/billiards.png" width="64px" height="64px" alt="用户" /></td>
-                    <td>
-                        ${sessionScope.account.bar.name }
-                        <br/>
-                        ${sessionScope.account.name }
-                        <br/>
-                        ${sessionScope.account.role }
-                        <br/>
-                    </td>
-                </tr>
-            </table>
-            <ul class="nav nav-list well">
-                <li class="nav-header">账目管理</li>
-                <li>
-                    <a href="#">
-                        <i class="icon-time"></i>
-                        球台管理
-                    </a>
-                </li>
-                <li>
-                    <a href="#"> 
-                        <i class="icon-user"></i>
-                        会员管理
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="${basePath }/produce/list"> 
-                        <i class="icon-white icon-barcode"></i>
-                        商品管理
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-signal"></i>
-                        统计信息
-                    </a>
-                </li>
-                <li class="nav-header">账户信息</li>
-                <li>
-                    <a href="${basePath }/account/inf">
-                        <i class=" icon-eye-open"></i> 
-                        个人资料
-                    </a>
-                </li>
-                <li>
-                    <a href="${basePath }/account/changepwd">
-                        <i class="icon-lock"></i>
-                        修改密码
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-gift"></i>
-                        更改主题
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-adjust"></i>
-                        球吧管理
-                    </a>
-                </li>
-            </ul>
+        	<%@ include file="../include/role.jsp" %>
         </div>
         <div class="span9 pull-right" style="margin-right:30px">
             <ul class="breadcrumb">
