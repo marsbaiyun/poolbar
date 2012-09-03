@@ -33,16 +33,22 @@
     <div id="content" class="container">
         <div class="well login">
             <h2>系统登录</h2>
+        		<c:if test="${errormsg != null }">
+					<div class="alert alert-error">
+						<button class="close" data-dismiss="alert">×</button>
+						<strong>${errormsg }</strong>
+					</div>
+				</c:if>
             <form action="${basePath }/login" method="post" id="myform">
             	<fieldset>
                     <div id="namediv" class="control-group">
                         <label for="username">用户名：</label>
-                        <input type="text" id="username" name="name" style="width:320px" />
+                        <input type="text" id="username" name="name" style="width:320px" value="${account.name }"/>
                         <span class="help-block" id="span1"></span>
                     </div>
                     <div id="pwddiv" class="control-group">
                         <label for="password">密码:<a href="#">忘记密码</a></label>
-                        <input type="password" id="password" name="password" style="width:320px" />
+                        <input type="password" id="password" name="password" style="width:320px" value="${account.password }"/>
                         <span class="help-block" id="span2"></span>
                     </div>
 					<div class="pull-right">
