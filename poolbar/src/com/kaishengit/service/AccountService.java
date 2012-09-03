@@ -27,4 +27,9 @@ public class AccountService {
 	public void update(Account account) {
 		accountMapper.update(account);
 	}
+
+	@Transactional(readOnly=true)
+	public Account findByName(String newname) {
+		return accountMapper.findByName(newname);
+	}
 }
