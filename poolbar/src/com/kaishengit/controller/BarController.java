@@ -66,7 +66,7 @@ public class BarController {
 	public ModelAndView count(HttpSession session,String startTime,String endTime){
 		Account account = (Account) session.getAttribute("account");
 		String barid = account.getBar().getId();
-		float total = barService.findTotal(startTime,barid);
+		float total = barService.findTotal(startTime,endTime,barid);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("startTime", startTime);				
