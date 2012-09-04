@@ -26,7 +26,7 @@ public class BarService {
 		map.put("barid", barid);
 		return barMapper.getTotal(map);
 	}
-
+	@Transactional(readOnly=true)
 	public float findTotal(String startTime, String endTime, String barid) {
 		Map<String, String> map = new HashMap<String, String>();  
 		map.put("startTime", startTime+" 00:00:00");  
