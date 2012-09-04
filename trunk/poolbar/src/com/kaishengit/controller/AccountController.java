@@ -67,7 +67,6 @@ public class AccountController {
 		Account a = accountService.findByName(newname);
 		return a;
 	}
-	
 	@RequestMapping("")
 	public String toTheme() {
 		return "theme/theme";
