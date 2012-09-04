@@ -56,7 +56,7 @@
 					</div>					
 					<div class="form-actions">
 						<button id="next" class="btn btn-primary" type="submit">保存</button>
-						<button class="btn" onclick="location.back()">返回</button>
+						<button class="btn" onclick="location.back(-1)">返回</button>
 					</div>								
 				</fieldset>
 			</form>
