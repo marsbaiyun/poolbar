@@ -7,7 +7,7 @@
 	<select id="findById" resultType="Bar" parameterType="String">
 		select * from t_bar where id = #{id}
 	</select>
-	<select id="getTotal" resultType="float" parameterType="map">
+	<select id="getTotal" resultType="String" parameterType="map">
 		select sum(total) from t_order where barid=#{barid} and( endtime between #{startTime} and #{endTime})
 	</select>
 	<insert id="save" parameterType="Bar">

@@ -17,11 +17,13 @@
             <%@ include file="../include/role.jsp" %>
         </div>
         <div class="span9 pull-right" style="margin-right:30px">
-            <ul class="breadcrumb">
-        		<li>
-        			<a href="#">统计信息</a>
-        		</li>
-            </ul>
+
+			<ul class="breadcrumb">
+		        <li class="active">球吧营业额 <span class="divider">/</span></li>
+		        <li><a href="${basePath }/bar/count/produce">商品营业额</a> <span class="divider">/</span></li>
+		        <li><a href="#">球台在线时长</a></li>
+		    </ul>
+            
             <h3>球吧营业额</h3><br/>           
             <form class="form-horizontal" action="${basePath }/bar/count" method="post">
            		<div class="control-group" >
@@ -54,7 +56,10 @@
                     </tr>
                 </tbody>
             </table>
-            <h3>售出商品统计</h3><br/>
+            <div class="pull-right">
+	            <p class="help-block"> 注：默认显示当月统计（从1号开始） </p>
+            </div>
+           <!--  <h3>售出商品统计</h3><br/>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -89,7 +94,7 @@
                         <td>160</td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
         </div>
     </div>
 </body>
