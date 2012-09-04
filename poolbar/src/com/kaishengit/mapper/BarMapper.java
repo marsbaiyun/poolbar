@@ -14,5 +14,5 @@ public interface BarMapper {
 	
 	public void del (String id);
 
-	public float getTotal(Map<String, String> map);
+	public String getTotal(Map<String, String> map);
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 
+import org.apache.ibatis.io.ResolverUtil.IsA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -15,9 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kaishengit.pojo.Account;
+import com.kaishengit.pojo.Consume;
 import com.kaishengit.pojo.Desk;
+import com.kaishengit.pojo.Produce;
 import com.kaishengit.service.BarService;
+import com.kaishengit.service.ConsumeService;
 import com.kaishengit.service.DeskService;
+import com.kaishengit.service.ProduceService;
 import com.kaishengit.util.DateUtil;
 
 @Controller
@@ -29,6 +34,12 @@ public class BarController {
 	
 	@Autowired
 	private DeskService deskService;
+	
+	@Autowired
+	private ProduceService produceService;
+	
+	@Autowired
+	private ConsumeService consumeService;
 	
 	@RequestMapping(value="/main",method=RequestMethod.GET)
 	public String menu (Model model,HttpSession session) {
@@ -47,34 +58,60 @@ public class BarController {
 		Desk d = deskService.findCheckid(desk);
 		return d;
 	}
+	
 	@RequestMapping(value="/count",method=RequestMethod.GET)
 	public ModelAndView count(HttpSession session){
 		Account account = (Account) session.getAttribute("account");
 		String barid = account.getBar().getId();
 		String startTime = DateUtil.getStartMonth();
 		String endTime = DateUtil.getDay();
-		float total = barService.findTotal(startTime,barid);
+		String total = barService.findTotal(startTime,barid);
+		if (total == null) {
+			total = "0";
+		}
+		float f = new Float(total);		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("startTime", startTime);				
 		mav.addObject("endTime", endTime);
-		mav.addObject("total",total);
+		mav.addObject("total",f);
 		mav.setViewName("count/count");
 		return mav;
 	}
+	
 	@RequestMapping(value="/count",method=RequestMethod.POST)
 	public ModelAndView count(HttpSession session,String startTime,String endTime){
 		Account account = (Account) session.getAttribute("account");
 		String barid = account.getBar().getId();
-		float total = barService.findTotal(startTime,endTime,barid);
-		
+		String total = barService.findTotal(startTime,endTime,barid);
+		if (total == null) {
+			total = "0";
+		}
+		float f = new Float(total);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("startTime", startTime);				
 		mav.addObject("endTime", endTime);
-		mav.addObject("total",total);
+		mav.addObject("total",f);
 		mav.setViewName("count/count");
 		return mav;
 	}
+	
+	@RequestMapping(value="/count/produce",method=RequestMethod.GET)
+	public ModelAndView producecount (HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		Account account = (Account) session.getAttribute("account");
+		String barid = account.getBar().getId();
+		String startTime = DateUtil.getStartMonth();
+		String endTime = DateUtil.getDay();
+		
+		List<Consume> consumeList = consumeService.findProduceByBarid(startTime,barid);
+		mav.addObject("starttime", startTime);				
+		mav.addObject("endtime", endTime);
+		mav.addObject("consumeList", consumeList);
+		mav.setViewName("count/produce");
+		return mav;
+	}
+	
 	
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	public String save (Desk desk,HttpSession session) {

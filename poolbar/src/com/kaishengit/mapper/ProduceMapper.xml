@@ -12,6 +12,9 @@
 		select id,`name`,price,barid from t_produce where barid = #{barid}
  	</select>
 	
+
+	
+	
 	<resultMap type="Produce" id="producelist">
 		<id column="id" property="id"/>
 		<result column="name" property="name"/>
