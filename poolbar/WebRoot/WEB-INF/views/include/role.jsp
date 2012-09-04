@@ -30,9 +30,9 @@
               商品管理
           </a>
       </li>
-      <li>
-          <a href="#">
-              <i class="icon-signal"></i>
+      <li id="countLi">
+          <a href="${basePath }/bar/count">
+              <i id="count" class="icon-signal"></i>
               统计信息
           </a>
       </li>
@@ -83,6 +83,9 @@
     		} else if (url.search("/bar/main") != -1) {
     			$("#barLi").addClass("active");
     			$("#barmain").addClass("icon-white");
+    		} else if (url.search("/account/count") != -1) {
+    			$("#countLi").addClass("active");
+    			$("#count").addClass("icon-white");
     		}
     	});
     </script>
