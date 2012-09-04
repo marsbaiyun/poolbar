@@ -18,7 +18,6 @@ import com.kaishengit.pojo.Account;
 import com.kaishengit.pojo.Desk;
 import com.kaishengit.service.BarService;
 import com.kaishengit.service.DeskService;
-import com.kaishengit.pojo.Bar;
 import com.kaishengit.util.DateUtil;
 
 @Controller
@@ -51,21 +50,28 @@ public class BarController {
 	@RequestMapping(value="/count",method=RequestMethod.GET)
 	public ModelAndView count(HttpSession session){
 		Account account = (Account) session.getAttribute("account");
-		Bar bar = account.getBar();
-		
+		String barid = account.getBar().getId();
+		String startTime = DateUtil.getStartMonth();
+		String endTime = DateUtil.getDay();
+		float total = barService.findTotal(startTime,barid);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("startTime", DateUtil.getStartMonth());				
-		mav.addObject("endTime", DateUtil.getDay());
+		mav.addObject("startTime", startTime);				
+		mav.addObject("endTime", endTime);
+		mav.addObject("total",total);
 		mav.setViewName("count/count");
 		return mav;
 	}
 	@RequestMapping(value="/count",method=RequestMethod.POST)
 	public ModelAndView count(HttpSession session,String startTime,String endTime){
+		Account account = (Account) session.getAttribute("account");
+		String barid = account.getBar().getId();
+		float total = barService.findTotal(startTime,barid);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("startTime",startTime );
-		mav.addObject("endTime",endTime);
+		mav.addObject("startTime", startTime);				
+		mav.addObject("endTime", endTime);
+		mav.addObject("total",total);
 		mav.setViewName("count/count");
 		return mav;
 	}

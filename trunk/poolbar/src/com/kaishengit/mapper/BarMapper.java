@@ -1,5 +1,7 @@
 package com.kaishengit.mapper;
 
+import java.util.Map;
+
 import com.kaishengit.pojo.Bar;
 
 public interface BarMapper {
@@ -11,4 +13,6 @@ public interface BarMapper {
 	public void update (Bar bar);
 	
 	public void del (String id);
+
+	public float getTotal(Map<String, String> map);
 }
