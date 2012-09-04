@@ -78,4 +78,21 @@ public class DeskService {
             consumeMapper.update(consume2);
         }
     }
+
+	public List<Desk> findByBarid(String barid) {
+		return deskMapper.findByBarid(barid);
+		
+	}
+
+	public Desk findCheckid(Desk desk) {
+		return deskMapper.findCheckid(desk);
+	}
+
+	public void save(Desk desk) {
+		deskMapper.save(desk);
+	}
+
+	public void updateDesk(Desk desk) {
+		deskMapper.updateDesk(desk);
+	}
 }

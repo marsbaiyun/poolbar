@@ -8,11 +8,19 @@
 		SELECT td.id,price,td.barid,orderid,starttime FROM t_desk AS td LEFT JOIN t_order AS tor ON td.orderid = tor.id WHERE td.barid = #{barid}
 	</select>
 	
+	<select id="findByBarid" parameterType="String" resultType="list" resultMap="deskMapper">
+		SELECT td.id,price,td.barid FROM t_desk AS td LEFT JOIN t_bar AS tb ON td.barid = tb.id WHERE td.barid = #{barid}
+	</select>	
+	
 	<select id="findById" resultType="Desk" parameterType="Desk" resultMap="deskMapper">
 		SELECT td.id,price,td.barid,orderid,starttime
 		FROM t_desk AS td
 		LEFT JOIN t_order AS tor ON td.orderid = tor.id
 		WHERE td.id = #{id} AND td.barid = #{barid}
+	</select>
+	
+	<select id="findCheckid" resultType="Desk" parameterType="Desk">
+		SELECT id,price,barid FROM t_desk WHERE id = #{id} AND barid = #{barid}
 	</select>
 	
 	<insert id="save" parameterType="Desk">
@@ -21,6 +29,10 @@
 	
 	<update id="updateOrderChange" parameterType="Desk">
 		update t_desk set orderid = #{orderid} where id = #{id} and barid = #{barid}
+	</update>
+	
+	<update id="updateDesk" parameterType="Desk">
+		update t_desk set price = #{price} where id = #{id}
 	</update>
 	
 	<update id="checkout" parameterType="String">

@@ -91,7 +91,7 @@
 			<a href="${basePath }/consume" class="btn">返回</a>
         </div>
     </div>
-    <form action="${basePath }/consume/checkout" method="post" class="form-horizontal">
+    <form id="checkout" action="${basePath }/consume/checkout" method="post" class="form-horizontal">
 	    <div class="modal hide fade in" id="checkout">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -136,7 +136,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" id="changeBtn" class="btn btn-primary">确定</button>
+				<button id="changeBtn" class="btn btn-primary">确定</button>
 				<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
 			</div>
 		</div>
@@ -175,6 +175,16 @@
 				$("#vipDiv").removeClass("error");
 				$("#vipSpan").text("");
 			});
+			$("#changeBtn").click(function () {
+				$("#vipId").blur();
+				var msg = $("#vipSpan").text();
+				if (msg != "卡号错误") {
+					$("#checkout").submit();
+				} else {
+					return false;
+				}
+			});
+			
 		});
 	</script>
 </body>
