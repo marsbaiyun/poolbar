@@ -2,6 +2,7 @@ package com.kaishengit.util;
 
 import java.util.TimeZone;
 
+
 import hirondelle.date4j.DateTime;
 
 public class DateUtil {
@@ -9,6 +10,10 @@ public class DateUtil {
     public static String getNow() {
         return DateTime.now(TimeZone.getDefault()).format("YYYY-MM-DD hh:mm:ss").toString();
     }
+    public static String getDay() {
+    	return DateTime.now(TimeZone.getDefault()).format("YYYY-MM-DD").toString();
+    }
+   
     
     public static float getDiff(String startTime, String endTime) {
         DateTime time1 = new DateTime(startTime);
@@ -20,9 +25,12 @@ public class DateUtil {
         return hour;
     }
     
+    public static String getStartMonth(){
+    	DateTime time1 = new DateTime(getNow());
+    	return time1.getStartOfMonth().format("YYYY-MM-DD").toString();
+    } 
+    
     public static void main(String[] args) {
-        String str1 = "2012-09-02 02:03:56";
-        String str2 = "2012-09-02 05:03:15";
-        System.out.println(getDiff(str1, str2));
+       System.out.println(getStartMonth());
     }
 }
