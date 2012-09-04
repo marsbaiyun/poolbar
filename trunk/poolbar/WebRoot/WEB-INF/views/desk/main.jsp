@@ -51,21 +51,22 @@
 	                        <div class="caption">
 	                            <table>
 	                                <tr>
-	                                    <td style="width:170px">
+	                                    <td style="width:165px">
 	                                    	<input type="hidden" value="${desk.id }" />
-	                                    	<button class="btn btn-primary open">开台</button>&nbsp;&nbsp;
+	                                    	<button class="btn btn-primary open">开台</button>
 	                                        <a href="#shopSome" data-toggle="modal" class="btn btn-danger shop">购物</a>
-	                                        <br/><br/>
-	                                        <a href="#changeDesk" data-toggle="modal" class="btn btn-info change">换台</a>&nbsp;&nbsp;
+	                                        <br/>
+	                                        <div style="margin-bottom:5px"></div>
+	                                        <a href="#changeDesk" data-toggle="modal" class="btn btn-info change">换台</a>
 	                                        <button class="btn btn-success checkout">详情</button>
 	                                    </td>
-	                                    <td class="info" style="width:66px">
-	                                    	${desk.id }号台<br/><br/>
+	                                    <td class="info" style="width:71px">
+	                                    	${desk.id }号台<br/>
 	                                    	<div class="startTime">
 		                                    	<c:if test="${not (empty desk.order) }">
 			                                    	${fn:substring(desk.order.starttime, 11, fn:length(desk.order.starttime)) }
 					                    		</c:if>
-	                                    	</div><br/>
+	                                    	</div>
 	                                    	<div class="price">${desk.price }元/时</div>
 	                                    </td>
 	                                </tr>

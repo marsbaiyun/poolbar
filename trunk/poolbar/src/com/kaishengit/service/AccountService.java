@@ -32,4 +32,5 @@ public class AccountService {
 	public Account findByName(String newname) {
 		return accountMapper.findByName(newname);
 	}
+
 }

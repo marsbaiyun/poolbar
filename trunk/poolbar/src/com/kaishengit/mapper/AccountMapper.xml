@@ -5,24 +5,24 @@
 	<cache/>
 	
 	<select id="login" resultType="Account" parameterType="Account" resultMap="accountMap">
-		SELECT ta.id,ta.`name` AS accountname,`password`,role,tb.id AS barid,tb.name AS barname,address,desknum FROM t_account AS ta LEFT JOIN t_bar AS tb ON ta.barid = tb.id where ta.name = #{name}	and password = #{password}
+		SELECT ta.id,ta.`name` AS accountname,`password`,role,css,tb.id AS barid,tb.name AS barname,address,desknum FROM t_account AS ta LEFT JOIN t_bar AS tb ON ta.barid = tb.id where ta.name = #{name}	and password = #{password}
 	</select>
 	
 	<select id="findById" resultType="Account" parameterType="String" resultMap="accountMap">
-		SELECT ta.id,ta.`name` AS accountname,`password`,role,tb.id AS barid,tb.name AS barname,address,desknum FROM t_account AS ta LEFT JOIN t_bar AS tb ON ta.barid = tb.id where id = #{id}
+		SELECT ta.id,ta.`name` AS accountname,`password`,role,css,tb.id AS barid,tb.name AS barname,address,desknum FROM t_account AS ta LEFT JOIN t_bar AS tb ON ta.barid = tb.id where id = #{id}
 	</select>
 	
 	<select id="findByName" resultType="Account" parameterType="String" resultMap="accountMap">
-		SELECT ta.id,ta.`name` AS accountname,`password`,role,tb.id AS barid,tb.name AS barname,address,desknum FROM t_account AS ta LEFT JOIN t_bar AS tb ON ta.barid = tb.id where ta.name = #{newname}
+		SELECT ta.id,ta.`name` AS accountname,`password`,role,css,tb.id AS barid,tb.name AS barname,address,desknum FROM t_account AS ta LEFT JOIN t_bar AS tb ON ta.barid = tb.id where ta.name = #{newname}
 	</select>
 	
 	
 	<insert id="save" parameterType="Account">
-		insert into t_account(id,`name`,password,role,barid) values(#{id},#{name},#{password},#{role},#{barid}) 
+		insert into t_account(id,`name`,password,role,barid,css) values(#{id},#{name},#{password},#{role},#{barid},#{css}) 
 	</insert>
 	
 	<update id="update" parameterType="Account">
-		update t_account set `name`=#{name},password = #{password} where id = #{id}
+		update t_account set `name`=#{name},password = #{password} ,css=#{css} where id = #{id}
 	</update>
 	
 	<delete id="del" parameterType="String">
@@ -34,6 +34,7 @@
 		<result property="name" column="accountname"/>
 		<result property="password" column="password"/>
 		<result property="role" column="role"/>
+		<result property="css" column="css"/>
 		<association property="bar" column="uid" javaType="Bar">
 			<id property="id" column="barid"/>
 			<result property="name" column="barname"/>

@@ -1,5 +1,7 @@
 ﻿body{
     font-family: "微软雅黑", "黑体", "华文细黑" !important;
+    font-size: 13px !important;
+    line-height: 18px !important;
 }
 
 .container {
@@ -21,7 +23,13 @@
 }
 th,td {
     text-align:center !important;
-} 
+}
+.btn {
+	padding: 4px 10px !important;
+	font-size: 13px !important;
+	line-height: 18px !important;
+	
+}
 .wall {
     -moz-border-bottom-colors: none;
     -moz-border-image: none;

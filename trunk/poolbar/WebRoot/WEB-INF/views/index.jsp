@@ -4,7 +4,11 @@
 <html>
 <head>
 	<title>台球连锁计费系统</title>
-	<%@ include file="include/head.jsp" %>
+	<meta charset="UTF-8">
+    <link rel="stylesheet" href="${basePath }/static/css/bootstrap.default.css" type="text/css" />
+    <link rel="stylesheet" href="${basePath }/static/css/style.css" type="text/css" />
+    <script type="text/javascript" src="${basePath }/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="${basePath }/static/js/bootstrap.min.js"></script>
 	<style type="text/css">
 		a{
 			margin-left:250px;
