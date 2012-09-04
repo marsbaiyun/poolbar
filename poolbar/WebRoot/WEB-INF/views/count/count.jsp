@@ -43,14 +43,14 @@
                     <tr>
                         <th>球吧ID</th>
                         <th>球吧名称</th>
-                        <th>营业额</th>
+                        <th>营业额(元)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>123</td>
-                        <td>辉耀台球吧</td>
-                        <td>1000元</td>
+                        <td>${account.bar.id }</td>
+                        <td>${account.bar.name }</td>
+                        <td>${total }</td>
                     </tr>
                 </tbody>
             </table>
