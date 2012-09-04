@@ -11,7 +11,7 @@ public class Account {
 	private Bar bar;
 	private List<Order> orderlist;
 	private String barid;
-	
+	private String css;
 	
 	public String getId() {
 		return id;
@@ -54,6 +54,12 @@ public class Account {
 	}
 	public void setBarid(String barid) {
 		this.barid = barid;
+	}
+	public String getCss() {
+		return css;
+	}
+	public void setCss(String css) {
+		this.css = css;
 	}
 	
 	
