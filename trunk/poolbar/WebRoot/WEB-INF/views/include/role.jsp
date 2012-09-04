@@ -55,9 +55,9 @@
               更改主题
           </a>
       </li>
-      <li>
-          <a href="#">
-              <i class="icon-adjust"></i>
+      <li id="barLi">
+          <a href="${basePath }/bar/main">
+              <i id="barmain" class="icon-adjust"></i>
               球吧管理
           </a>
       </li>
@@ -80,6 +80,9 @@
     		} else if (url.search("/account/changepwd") != -1) {
     			$("#changepwdLi").addClass("active");
     			$("#changepwd").addClass("icon-white");
+    		} else if (url.search("/bar/main") != -1) {
+    			$("#barLi").addClass("active");
+    			$("#barmain").addClass("icon-white");
     		}
     	});
     </script>

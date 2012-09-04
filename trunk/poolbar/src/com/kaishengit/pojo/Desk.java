@@ -1,7 +1,10 @@
 package com.kaishengit.pojo;
 
-public class Desk {
+import java.io.Serializable;
 
+public class Desk implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private float price;
 	private Bar bar;
