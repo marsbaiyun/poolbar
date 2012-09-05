@@ -6,6 +6,7 @@ public class Order {
 	private String starttime;
 	private String endtime;
 	private float total;
+	private float costtime;
 	private Vip vip;
 	private Desk desk;
 	private Bar bar;
@@ -39,6 +40,14 @@ public class Order {
 	}
 	public void setTotal(float total) {
 		this.total = total;
+	}
+	
+	
+	public float getCosttime() {
+		return costtime;
+	}
+	public void setCosttime(float costtime) {
+		this.costtime = costtime;
 	}
 	public Vip getVip() {
 		return vip;

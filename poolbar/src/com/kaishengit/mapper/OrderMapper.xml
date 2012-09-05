@@ -12,12 +12,27 @@
 		SELECT COUNT(total) FROM t_order WHERE vipid = #{vipid}
 	</select>
 	
+	<select id="getCount" parameterType="map" resultType="list" resultMap="orderList">
+		SELECT SUM(costtime) AS sumtime,tor.deskid,SUM(total) AS sumtotal FROM t_order AS tor
+		RIGHT JOIN t_desk AS td ON  tor.deskid = td.id
+		WHERE tor.deskid IN (
+		SELECT id FROM t_desk WHERE barid = #{barid}	
+		) AND endtime BETWEEN #{startTime} AND #{endTime}
+		GROUP BY tor.deskid	
+	</select>
+	
+	<resultMap type="Order" id="orderList">
+		<result property="costtime" column="sumtime"/>
+		<result property="deskid" column="deskid"/>
+		<result property="total" column="sumtotal"/>
+	</resultMap>
+	
 	<insert id="save" parameterType="Order">
 		insert into t_order(id,starttime,endtime,total,vipid,deskid,barid,accountid) values(#{id},#{starttime},#{endtime},#{total},#{vipid},#{deskid},#{barid},#{accountid}) 
 	</insert>
 	
 	<update id="update" parameterType="Order">
-		update t_order set endtime = #{endtime},total=#{total},vipid = #{vipid} where id = #{id}
+		update t_order set endtime = #{endtime},total=#{total},vipid = #{vipid},costtime = #{costtime} where id = #{id}
 	</update>
 	
 	<delete id="del" parameterType="String">
