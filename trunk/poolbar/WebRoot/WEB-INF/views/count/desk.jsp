@@ -19,46 +19,50 @@
         <div class="span9 pull-right" style="margin-right:30px">
 
 			<ul class="breadcrumb">
-		        <li class="active">球吧营业额 <span class="divider">/</span></li>
+		        <li><a href="${basePath }/bar/count">球吧营业额 </a><span class="divider">/</span></li>
 		        <li><a href="${basePath }/bar/count/produce">商品营业额</a> <span class="divider">/</span></li>
-		        <li><a href="${basePath }/bar/count/desk">球台在线时长</a></li>
+		        <li class="active">球台在线时长</li>
 		    </ul>
             
-            <h3>球吧营业额</h3><br/>           
-            <form class="form-horizontal" action="${basePath }/bar/count" method="post">
+            <h3>球台在线统计</h3><br/>
+            <form class="form-horizontal" action="${basePath }/bar/count/desk" method="post">
            		<div class="control-group" >
 					<label class="control-label" >开始时间：</label>
 					<div class="controls">
-					 	<input  type="text" onClick="WdatePicker()" name="startTime" value="${startTime }"/>
+					 	<input  type="text" onClick="WdatePicker()" name="starttime" value="${starttime }"/>
 					</div>
 				</div>
            		<div class="control-group">
 					<label class="control-label" >结束时间：</label>
 					<div class="controls">
-					 	<input  type="text" onClick="WdatePicker()" name="endTime" value="${endTime }"/>
+					 	<input  type="text" onClick="WdatePicker()" name="endtime" value="${endtime }"/>
 						<input value="查询" type="submit" class="btn btn-primary" style="margin-left:10px;">
 					</div>
 				</div>	
-            </form>
+            </form>            
             <table class="table table-bordered">
                 <thead>
+
                     <tr>
-                        <th>球吧ID</th>
-                        <th>球吧名称</th>
-                        <th>营业额(元)</th>
+                        <th>桌号</th>
+                        <th>总在线时长</th>
+                        <th>营业额</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>${account.bar.id }</td>
-                        <td>${account.bar.name }</td>
-                        <td>${total }</td>
-                    </tr>
+	                <c:forEach items="${orderList }" var="order">
+	                    <tr>
+	                        <td>${order.deskid }</td>
+	                        <td>${order.costtime }小时</td>
+	                        <td>${order.total }</td>
+	                    </tr>
+	                </c:forEach>
                 </tbody>
             </table>
             <div class="pull-right">
 	            <p class="help-block"> 注：默认显示当月统计（从1号开始） </p>
             </div>
+
         </div>
     </div>
 </body>

@@ -105,7 +105,7 @@ public class DeskController {
         //先设置结束时间和当前金额，不更新到数据库，仅仅显示在页面
         order.setEndtime(DateUtil.getNow());
         order.setTotal((float) Math.ceil(DateUtil.getDiff(order.getStarttime(), order.getEndtime()) * desk.getPrice()));
-        
+        order.setCosttime(DateUtil.getDiff(order.getStarttime(), order.getEndtime()));
         //查询订单购买的商品
         List<Consume> consumeList = consumeService.findByOrderId(order.getId());
         mav.addObject("order", order);
@@ -122,6 +122,7 @@ public class DeskController {
     
     @RequestMapping("/checkout")
     public String checkout(Order order, String select, RedirectAttributes redirectAttributes) {
+    	System.out.println(order.getCosttime());
         int[] money = orderService.checkout(order, select);
         redirectAttributes.addFlashAttribute("code", "结账成功，账单金额" + money[0] + "元，卡内扣除" + money[1] + "元，应付现金" + money[2] + "元。");
         return "redirect:/consume";

@@ -1,5 +1,9 @@
 package com.kaishengit.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +14,7 @@ import com.kaishengit.mapper.VipMapper;
 import com.kaishengit.pojo.Desk;
 import com.kaishengit.pojo.Order;
 import com.kaishengit.pojo.Vip;
+import com.kaishengit.util.DateUtil;
 
 @Service
 @Transactional
@@ -88,5 +93,24 @@ public class OrderService {
         orderMapper.update(order);
         return money;
     }
+
+	public List<Order> findOrdersByBarid(String startTime, String barid) {
+		Map<String, String> map = new HashMap<String, String>();  
+		map.put("startTime", startTime+" 00:00:00");  
+		map.put("endTime", DateUtil.getNow());  
+		
+		map.put("barid", barid);
+		return orderMapper.getCount(map);
+	}
+
+	public List<Order> findOrdersByBarid(String starttime, String endtime,
+			String barid) {
+		Map<String, String> map = new HashMap<String, String>();  
+		map.put("startTime", starttime +" 00:00:00");  
+		map.put("endTime", endtime + " 23:59:59");  
+		
+		map.put("barid", barid);
+		return orderMapper.getCount(map);
+	}
     
 }

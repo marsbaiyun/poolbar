@@ -18,10 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kaishengit.pojo.Account;
 import com.kaishengit.pojo.Consume;
 import com.kaishengit.pojo.Desk;
+import com.kaishengit.pojo.Order;
 import com.kaishengit.pojo.Produce;
 import com.kaishengit.service.BarService;
 import com.kaishengit.service.ConsumeService;
 import com.kaishengit.service.DeskService;
+import com.kaishengit.service.OrderService;
 import com.kaishengit.service.ProduceService;
 import com.kaishengit.util.DateUtil;
 
@@ -40,6 +42,9 @@ public class BarController {
 	
 	@Autowired
 	private ConsumeService consumeService;
+	
+	@Autowired
+	private OrderService orderService;
 	
 	@RequestMapping(value="/main",method=RequestMethod.GET)
 	public String menu (Model model,HttpSession session) {
@@ -112,6 +117,49 @@ public class BarController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/count/produce",method=RequestMethod.POST)
+	public ModelAndView producecount (HttpSession session,String starttime,String endtime) {
+		ModelAndView mav = new ModelAndView();
+		Account account = (Account) session.getAttribute("account");
+		String barid = account.getBar().getId();
+		
+		List<Consume> consumeList = consumeService.findProduceByBarid(starttime,endtime,barid);
+		mav.addObject("starttime", starttime);				
+		mav.addObject("endtime", endtime);
+		mav.addObject("consumeList", consumeList);
+		mav.setViewName("count/produce");
+		return mav;
+	}
+	
+	@RequestMapping(value="/count/desk",method=RequestMethod.GET)
+	public ModelAndView deskcount (HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		Account account = (Account) session.getAttribute("account");
+		String barid = account.getBar().getId();
+		String startTime = DateUtil.getStartMonth();
+		String endTime = DateUtil.getDay();
+		
+		List<Order> orderList = orderService.findOrdersByBarid(startTime,barid);
+		mav.addObject("starttime", startTime);				
+		mav.addObject("endtime", endTime);
+		mav.addObject("orderList", orderList);
+		mav.setViewName("count/desk");
+		return mav;		
+	}
+	
+	@RequestMapping(value="/count/desk",method=RequestMethod.POST)
+	public ModelAndView deskcount (HttpSession session,String starttime,String endtime) {
+		ModelAndView mav = new ModelAndView();
+		Account account = (Account) session.getAttribute("account");
+		String barid = account.getBar().getId();
+		
+		List<Order> orderList = orderService.findOrdersByBarid(starttime,endtime,barid);
+		mav.addObject("starttime", starttime);				
+		mav.addObject("endtime", endtime);
+		mav.addObject("orderList", orderList);
+		mav.setViewName("count/desk");
+		return mav;		
+	}
 	
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	public String save (Desk desk,HttpSession session) {

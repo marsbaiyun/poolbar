@@ -21,11 +21,11 @@
 			<ul class="breadcrumb">
 		        <li><a href="${basePath }/bar/count">球吧营业额</a> <span class="divider">/</span></li>
 		        <li class="active">商品营业额 <span class="divider">/</span></li>
-		        <li><a href="#">球台在线时长</a></li>
+		        <li><a href="${basePath }/bar/count/desk">球台在线时长</a></li>
 		    </ul>
             
             <h3>商品营业额</h3><br/>           
-            <form class="form-horizontal" action="${basePath }/bar/count" method="post">
+            <form class="form-horizontal" action="${basePath }/bar/count/produce" method="post">
            		<div class="control-group" >
 					<label class="control-label" >开始时间：</label>
 					<div class="controls">

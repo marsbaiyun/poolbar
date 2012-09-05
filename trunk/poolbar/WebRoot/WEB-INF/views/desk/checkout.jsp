@@ -100,6 +100,7 @@
 			<div class="modal-body">
 				<input type="hidden" value="${order.id }" name="id"/>
 				<input type="hidden" value="${order.endtime }" name="endtime"/>
+				<input type="hidden" value="${order.costtime }" name="costtime" id="h123"/>
 				<div class="control-group">
 					<label class="control-label">台球费</label>
 					<div class="controls">

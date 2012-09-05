@@ -25,13 +25,22 @@ public class ConsumeService {
     }
 
     @Transactional(readOnly=true)
-	public List<Consume> findProduceByBarid(String starTtime,String barid) {
+	public List<Consume> findProduceByBarid(String startTime,String barid) {
 		Map<String, String> map = new HashMap<String, String>();  
-		map.put("starttime", starTtime +" 00:00:00");  
+		map.put("starttime", startTime +" 00:00:00");  
 		map.put("endtime", DateUtil.getNow());  
 		map.put("barid", barid);
-		System.out.println(consumeMapper.findProduceByBarid(map).size());
 		return consumeMapper.findProduceByBarid(map);
 		
+	}
+
+    @Transactional(readOnly=true)
+	public List<Consume> findProduceByBarid(String startTime, String endTime,
+			String barid) {
+		Map<String, String> map = new HashMap<String, String>();  
+		map.put("starttime", startTime + " 00:00:00"); 
+		map.put("endtime", endTime + " 23:59:59");  
+		map.put("barid", barid);
+		return consumeMapper.findProduceByBarid(map);
 	}
 }
